@@ -41,7 +41,9 @@ public:
     void avancer(); // Passe au symbole suivant du fichier
 
     inline const Symbole& getSymbole() const {
+        cout << "Symbole lu : " << m_symbole << endl;
         return m_symbole;
+        
     } // Symbole courant
 
     inline unsigned int getLigne() const {

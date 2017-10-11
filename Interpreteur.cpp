@@ -45,10 +45,11 @@ Noeud* Interpreteur::programme() {
   testerEtAvancer("principale");
   testerEtAvancer("(");
   testerEtAvancer(")");
-  Noeud* sequence = seqInst();
+ Noeud* sequence = seqInst();
   testerEtAvancer("finproc");
   tester("<FINDEFICHIER>");
   return sequence;
+
 }
 
 Noeud* Interpreteur::seqInst() {
@@ -56,7 +57,8 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
-  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si") || m_lecteur.getSymbole() == "tantQue";
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque");
+ 
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
@@ -72,7 +74,7 @@ Noeud* Interpreteur::inst() {
   }
   else if (m_lecteur.getSymbole() == "si")
     return instSi();
-  else if (m_lecteur.getSymbole() == "tantQue")
+  else if (m_lecteur.getSymbole() == "tantque")
     return instTantQue();
   // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
   else erreur("Instruction incorrecte");
@@ -142,14 +144,14 @@ Noeud* Interpreteur::instSi() {
 
 
 Noeud* Interpreteur::instTantQue() {
-    // <instTantQue> ::= tantQue ( <expression> ) seqInst finTantQue
-    testerEtAvancer("tantQue");
+    // <instTantQue> ::= tantque ( <expression> ) seqInst fintantque
+    testerEtAvancer("tantque");
     testerEtAvancer("(");
     Noeud* condition = expression(); // On mémorise la condition
     testerEtAvancer(")");
     Noeud* sequence = seqInst();     // On mémorise la séquence d'instruction
-    testerEtAvancer("finTantQue");
+    testerEtAvancer("fintantque");
     return nullptr; 
-    //return new NoeudInstTantQue(condition, sequence); // Et on renvoie un noeud Instruction TantQue
+    //return new NoeudInstTantQue(condition, sequence); // Et on renvoie un noeud Instruction tantque
     
 }
