@@ -16,7 +16,7 @@ m_lecteurCar(fichier), m_symbole("") {
 
 void Lecteur::avancer() {
   sauterSeparateurs();
-  // on est maintenant positionne sur le premier caractère d'un symbole
+  // on est maintenant positionné sur le premier caractère d'un symbole
   m_ligne = m_lecteurCar.getLigne();
   m_colonne = m_lecteurCar.getColonne();
   m_symbole = Symbole(motSuivant()); // on reconstruit symbole avec le nouveau mot lu
