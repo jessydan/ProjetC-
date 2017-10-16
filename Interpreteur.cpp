@@ -214,8 +214,7 @@ Noeud* Interpreteur::instPour() {
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
-    return nullptr;
-    //return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
+    return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
 }
 
 Noeud* Interpreteur::instEcrire() {
@@ -224,6 +223,7 @@ Noeud* Interpreteur::instEcrire() {
     testerEtAvancer("(");
     if (m_lecteur.getSymbole()==("\"")){// on regarde si il ya la double croche de chaines de caractère
         testerEtAvancer("\"");
+        
     }
     
 }
