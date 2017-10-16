@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
 #include "Symbole.h"
@@ -93,5 +94,54 @@ class NoeudInstTantQue : public Noeud {
   private:
     Noeud*  m_condition;
     Noeud*  m_sequence;
+};
+/////////////////////////////////////////////////////////////////////////////////
+class NoeudInstRepeter : public Noeud {
+// Classe pour représenter un noeud "instruction Repeter"
+//  et ses 2 fils : la condition de repeter et la séquence d'instruction associée
+  public:
+    NoeudInstRepeter(Noeud* sequence, Noeud* condition);
+     // Construit une "instruction repeter" avec sa condition et sa séquence d'instruction
+   ~NoeudInstRepeter() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction Repeter : repeter la séquence tant que la condition est vraie
+
+  private:
+    Noeud*  m_condition;
+    Noeud*  m_sequence;
+};
+///////////////////////////////////////////////////////////////////////////////
+class NoeudInstSiRiche : public Noeud {
+// Classe pour représenter un noeud "instruction Si riche"
+//  et ses multiples fils : au min une conditionSi , une instructionSi et un instructionSinon
+//                          ou alors on rajoute des conditionSinonSi et des instructionSinonSi
+  public:
+    NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds);
+     // Construit une instruction SiRiche avec le vector de noeud mis en paramètre.
+   ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction SiRiche : Si la condition est vrai alors, sinonsi la condition est vraie alors ... sinon on excute la séquence
+    
+
+  private:
+    Noeud*  m_condition;
+    Noeud*  m_sequence;
+    std::vector<Noeud*> vectNoeuds;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+class NoeudInstPour : public Noeud {
+// Classe pour représenter un noeud "instruction pour"
+//  et ses 4 fils : l'affectation du début du pour, la condition d'arrêt du pour, l'affectation de fin du pour ,et la séquence d'instruction
+  public:
+    NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence);
+     // Construit une instruction Pour avec les noeuds mis en paramètre.
+   ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction Pour : Pour (affectationDebut; condition d'arret, affectationFin) on exécute la séquence
+    
+
+  private:
+    Noeud*  m_conditionArret;
+    Noeud*  m_sequence;
+    Noeud*  m_affectationDebut;
+    Noeud*  m_affectationFin;
 };
 #endif /* ARBREABSTRAIT_H */

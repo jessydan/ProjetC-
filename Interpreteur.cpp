@@ -57,7 +57,8 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
-  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque");
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" 
+          || m_lecteur.getSymbole()=="repeter" || m_lecteur.getSymbole()=="pour");
  
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -76,6 +77,10 @@ Noeud* Interpreteur::inst() {
     return instSi();
   else if (m_lecteur.getSymbole() == "tantque")
     return instTantQue();
+  else if (m_lecteur.getSymbole() == "repeter")
+      return instRepeter();
+  else if (m_lecteur.getSymbole() == "pour")
+      return instPour();
   // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
   else erreur("Instruction incorrecte");
 }
@@ -151,7 +156,74 @@ Noeud* Interpreteur::instTantQue() {
     testerEtAvancer(")");
     Noeud* sequence = seqInst();     // On mémorise la séquence d'instruction
     testerEtAvancer("fintantque");
-    return nullptr; 
-    //return new NoeudInstTantQue(condition, sequence); // Et on renvoie un noeud Instruction tantque
+    return new NoeudInstTantQue(condition, sequence); // Et on renvoie un noeud Instruction tantque
+    
+}
+
+Noeud* Interpreteur::instRepeter() {
+// <instTepeter> ::= repeter <seqInst> jusqua( <expression> )
+    testerEtAvancer("repeter");
+    testerEtAvancer("(");
+    Noeud* sequence = seqInst(); // on mémorise la sequence d'instruction
+    testerEtAvancer(")");
+    testerEtAvancer("jusqua");
+    testerEtAvancer("(");
+    Noeud* condition = expression(); // on mémorise la condition
+    testerEtAvancer(")");
+    return new NoeudInstRepeter(sequence, condition); // on retourne un noeud de l'instruction répeter
+}
+
+Noeud* Interpreteur::instSiRiche() {
+// <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
+    testerEtAvancer("si");
+    testerEtAvancer("(");
+    Noeud* conditionSi = expression(); // on mémorise la condition
+    vectNoeuds.push_back(conditionSi);
+    testerEtAvancer(")");
+    Noeud* sequenceSi = seqInst(); // on mémorise la séquence d'instruction
+    vectNoeuds.push_back(sequenceSi);
+    while(m_lecteur.getSymbole()=="sinon"){
+        if (m_lecteur.getSymbole()=="sinonsi"){
+            testerEtAvancer("sinonsi");
+            testerEtAvancer("(");
+            Noeud* conditionSinonSi = expression();
+            vectNoeuds.push_back(conditionSinonSi);
+            testerEtAvancer(")");
+            Noeud* sequenceSinonSi = seqInst();
+            vectNoeuds.push_back(sequenceSinonSi);
+        }
+    }
+    testerEtAvancer("sinon");
+    Noeud* sequenceSinon = seqInst();
+    vectNoeuds.push_back(sequenceSinon);
+    testerEtAvancer("finsi");
+    
+    return nullptr;
+    //return new NoeudInstSiRiche(vectNoeuds); on retourne un noeud de l'instruction si riche .
+}
+
+Noeud* Interpreteur::instPour() {
+    // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    Noeud* affectationDebut = affectation();
+    testerEtAvancer(";");
+    Noeud* conditionArret = expression();
+    testerEtAvancer(";");
+    Noeud* affectationFin = affectation();
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+    return nullptr;
+    //return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
+}
+
+Noeud* Interpreteur::instEcrire() {
+    // <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole()==("\"")){// on regarde si il ya la double croche de chaines de caractère
+        testerEtAvancer("\"");
+    }
     
 }

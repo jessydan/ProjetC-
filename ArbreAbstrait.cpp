@@ -79,6 +79,7 @@ int NoeudInstSi::executer() {
   if (m_condition->executer()) m_sequence->executer();
   return 0; // La valeur renvoyée ne représente rien !
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
@@ -88,6 +89,53 @@ NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence)
 }
 
 int NoeudInstTantQue::executer() {
-  if (m_condition->executer()) m_sequence->executer();
+    while(m_condition->executer()){
+        m_sequence->executer();
+    }
   return 0; // La valeur renvoyée ne représente rien !
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstRepeter
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence, Noeud* condition)
+: m_sequence(sequence), m_condition(condition){
+}
+
+int NoeudInstRepeter::executer() {
+    do{
+        m_sequence->executer();
+    }while(m_condition->executer());
+    return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstSiRiche
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstSiRiche::NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds)
+:vectNoeuds(vectNoeuds){
+}
+
+int NoeudInstSiRiche::executer() {
+// à compléter
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstPour::NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence) 
+:m_affectationDebut(affectationDebut), m_affectationFin(affectationFin), m_conditionArret(conditionArret), m_sequence(sequence){
+}
+
+int NoeudInstPour::executer() {
+    for (m_affectationDebut->executer();m_conditionArret->executer();m_affectationFin->executer()){
+        m_sequence->executer();
+    }
+}
+
+

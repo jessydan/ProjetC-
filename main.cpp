@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
     cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable();
   } catch (InterpreteurException & e) {
     cout << e.what() << endl;
+    //throw; // repropagation de l'exception
   }
   return 0;
 }

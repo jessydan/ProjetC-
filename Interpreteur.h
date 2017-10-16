@@ -6,6 +6,7 @@
 #include "Exceptions.h"
 #include "TableSymboles.h"
 #include "ArbreAbstrait.h"
+#include <vector>
 
 class Interpreteur {
 public:
@@ -24,6 +25,7 @@ private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
     TableSymboles  m_table;    // La table des symboles valués
     Noeud*         m_arbre;    // L'arbre abstrait
+    std::vector<Noeud*> vectNoeuds;
 
     // Implémentation de la grammaire
     Noeud*  programme();   //   <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER
@@ -35,11 +37,16 @@ private:
                            //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
     Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); // <instTantQue> ::= tant que ( <expression> ) <seqInst> finTantQue
-
+    Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
+    Noeud*  instEcrire();  // <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+    Noeud*  instSiRiche(); // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
+    Noeud*  instPour();    // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
+ 
     // outils pour simplifier l'analyse syntaxique
     void tester (const string & symboleAttendu) const throw (SyntaxeException);   // Si symbole courant != symboleAttendu, on lève une exception
     void testerEtAvancer(const string & symboleAttendu) throw (SyntaxeException); // Si symbole courant != symboleAttendu, on lève une exception, sinon on avance
     void erreur (const string & mess) const throw (SyntaxeException);             // Lève une exception "contenant" le message mess
+    
 };
 
 #endif /* INTERPRETEUR_H */

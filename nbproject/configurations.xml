@@ -15,6 +15,7 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>motsCles.txt</itemPath>
       <itemPath>programme.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -78,6 +79,8 @@
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
@@ -128,6 +131,8 @@
       <item path="TableSymboles.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
