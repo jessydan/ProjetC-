@@ -144,4 +144,22 @@ class NoeudInstPour : public Noeud {
     Noeud*  m_affectationDebut;
     Noeud*  m_affectationFin;
 };
+
+///////////////////////////////////////////////////////////////////////////////
+class NoeudInstEcrire : public Noeud {
+// Classe pour représenter un noeud "instruction ecrire"
+//  et ses 2 fils : vecteur de noeuds , et vecteur de noeud supplémentaires
+  public:
+    NoeudInstEcrire(Noeud* noeudPremierElement, vector<Noeud*> noeudsSupp);
+     // Construit une instruction ecrire avec les vector de noeuds mis en paramètre.
+   ~NoeudInstEcrire() {}; // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction ecrire : ecris ( <expression> | <chaine> puis potentiellement d'autres)
+    
+
+  private:
+      Noeud* m_noeud;
+      std::vector<Noeud*> m_noeudsSupp;
+};
+
+
 #endif /* ARBREABSTRAIT_H */

@@ -26,6 +26,8 @@ private:
     TableSymboles  m_table;    // La table des symboles valués
     Noeud*         m_arbre;    // L'arbre abstrait
     std::vector<Noeud*> vectNoeuds;
+    std::vector<SymboleValue*> vectSymbValues;
+    const Symbole  chaine; 
 
     // Implémentation de la grammaire
     Noeud*  programme();   //   <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER
@@ -39,6 +41,7 @@ private:
     Noeud*  instTantQue(); // <instTantQue> ::= tant que ( <expression> ) <seqInst> finTantQue
     Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
     Noeud*  instEcrire();  // <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+    Noeud*  instLire();    // <instLire>    ::= lire ( <variable> {, <variable> })
     Noeud*  instSiRiche(); // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
     Noeud*  instPour();    // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
  

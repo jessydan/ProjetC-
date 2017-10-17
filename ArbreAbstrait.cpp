@@ -3,6 +3,7 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include <typeinfo>
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -127,15 +128,52 @@ int NoeudInstSiRiche::executer() {
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstPour
 ////////////////////////////////////////////////////////////////////////////////
-
+/*
 NoeudInstPour::NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence) 
 :m_affectationDebut(affectationDebut), m_affectationFin(affectationFin), m_conditionArret(conditionArret), m_sequence(sequence){
 }
 
 int NoeudInstPour::executer() {
-    for (m_affectationDebut->executer();m_conditionArret->executer();m_affectationFin->executer()){
-        m_sequence->executer();
+    if(m_affectationDebut==nullptr || m_affectationFin==nullptr){
+        for (m_conditionArret->executer()){
+            m_sequence->executer();
+        }
+    }else{
+        for (m_affectationDebut->executer();m_conditionArret->executer();m_affectationFin->executer()){
+            m_sequence->executer();
+        }
     }
 }
+*/
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstEcrire
+////////////////////////////////////////////////////////////////////////////////
 
+ NoeudInstEcrire::NoeudInstEcrire(Noeud* noeudPremierElement, vector<Noeud*> noeudsSupp)
+:m_noeud(noeudPremierElement), m_noeudsSupp(noeudsSupp){
+}
+ 
+int NoeudInstEcrire::executer() {
+    Noeud* p;
+    p = m_noeud; // on pointe sur le noeud du premier element
+    
+    // on regarde si l’objet pointé par p est de type SymboleValue et si c’est une chaîne
+    if ( (typeid(*p)==typeid(SymboleValue) && *((SymboleValue*)p)== "<CHAINE>")){
+        cout << ((SymboleValue*)p)->getChaine() ;  //on affiche la chaine de caractere
+    }else{
+        cout << p->executer(); // on affiche le résultat
+    }
+    
+    for(int i=0; i<m_noeudsSupp.size(); i++){
+        cout << " , " ; 
+        p=m_noeudsSupp[i]; // on fait pointer p sur l'element courant du vecteur
+        if ( (typeid(*p)==typeid(SymboleValue) && *((SymboleValue*)p)== "<CHAINE>")){
+            cout << ((SymboleValue*)p)->getChaine() ;  //on affiche la chaine de caractere
+        }else{
+            cout << p->executer(); // on affiche le résultat
+        }
+    }
+    
+     
+}
 

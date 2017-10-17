@@ -1,10 +1,7 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-j=0;
-pour
-(k=0; k<5; k=k+1)
-j=j+1;
-finpour
+i=1;
+ecrire("i=",i,"test d'une seconde chaine","test d'une trosieme chiane");
 finproc
 # Commentaire Final

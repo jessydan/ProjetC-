@@ -11,8 +11,8 @@ const char * Symbole::FICHIER_MOTS_CLES = "motsCles.txt";
 Symbole::Symbole(const string & s) : m_chaine(s) {
   // attention : l'ordre des tests ci-dessous n'est pas innocent !
   if (s == "") this->m_categorie = FINDEFICHIER;
-  else if (isdigit(s[0])) this->m_categorie = ENTIER;
-  else if (s.size() >= 2 && s[0] == '"' && s[s.size() - 1] == '"') this->m_categorie = CHAINE;
+  else if (isdigit(s[0])) this->m_categorie = ENTIER; // si ce sont des chiffres il fait un entier
+  else if (s.size() >= 2 && s[0] == '"' && s[s.size() - 1] == '"') this->m_categorie = CHAINE; // si il rencontre des " il créer une chaîne
   else if (isMotCle(s)) this->m_categorie = MOTCLE;
   else if (isalpha(s[0])) this->m_categorie = VARIABLE;
   else this->m_categorie = INDEFINI;
@@ -61,3 +61,5 @@ ostream & operator<<(ostream & cout, const Symbole & symbole) {
   cout << " : \"" << symbole.m_chaine << "\"";
   return cout;
 }
+
+
