@@ -117,11 +117,35 @@ int NoeudInstRepeter::executer() {
 ////////////////////////////////////////////////////////////////////////////////
 
 NoeudInstSiRiche::NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds)
-:vectNoeuds(vectNoeuds){
+:m_vectNoeuds(vectNoeuds){
 }
 
 int NoeudInstSiRiche::executer() {
-// à compléter
+    //on sait que le premier indice du vecteur contient la condition du Si, et la seconde la séquence de celui-ci
+    // on sait aussi que le dernier element est la séquence du sinon ( qui n'a pas de condition)
+    //m_vectNoeuds.at(0) == condition si
+    //m_vectNoeuds.at(1) == séquence si
+    bool exit =false;
+    for(int j = 0; m_vectNoeuds.size();j++){
+        cout << m_vectNoeuds.at(j) << endl;
+    }
+   
+    
+    for(int i=0; i<m_vectNoeuds.size() || exit==true ; i++){ //on parcours le vecteur
+        if(i<m_vectNoeuds.size()-1){ // si on n'est pas au dernier élément (soit la séquence du sinon)
+            cout << i <<endl;
+            if(m_vectNoeuds.at(i)->executer()){ // si la condition est bonne
+                m_vectNoeuds.at(i+1)->executer(); // on execute la séquence
+                exit=true; // si un si || sinonSi est exécuté on sort de la boucle 
+                cout << " \nnumero de i "<<i <<endl;
+            }
+        }else{ // si on est à la condition du sinon
+            m_vectNoeuds[i]->executer(); //on execute la sequence de sinon
+            
+            exit=true;
+        } 
+    }
+    return 0;
 }
 
 

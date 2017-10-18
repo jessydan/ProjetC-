@@ -124,7 +124,7 @@ class NoeudInstSiRiche : public Noeud {
   private:
     Noeud*  m_condition;
     Noeud*  m_sequence;
-    std::vector<Noeud*> vectNoeuds;
+    std::vector<Noeud*> m_vectNoeuds;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

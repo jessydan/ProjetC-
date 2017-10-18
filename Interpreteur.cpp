@@ -75,7 +75,7 @@ Noeud* Interpreteur::inst() {
     return affect;
   }
   else if (m_lecteur.getSymbole() == "si")
-    return instSi();
+    return instSiRiche();
   else if (m_lecteur.getSymbole() == "tantque")
     return instTantQue();
   else if (m_lecteur.getSymbole() == "repeter")
@@ -178,33 +178,32 @@ Noeud* Interpreteur::instRepeter() {
     return new NoeudInstRepeter(sequence, condition); // on retourne un noeud de l'instruction répeter
 }
 
-Noeud* Interpreteur::instSiRiche() {
+Noeud* Interpreteur::instSiRiche() { // revoir le vecteur
 // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
+    vector<Noeud*> noeuds;
+    
     testerEtAvancer("si");
     testerEtAvancer("(");
-    Noeud* conditionSi = expression(); // on mémorise la condition
-    vectNoeuds.push_back(conditionSi);
+    Noeud* conditionSi = expression(); // on créer le noeud pour la première condition
+    noeuds.push_back(conditionSi); // on met la condition dans le vecteur de noeuds
     testerEtAvancer(")");
-    Noeud* sequenceSi = seqInst(); // on mémorise la séquence d'instruction
-    vectNoeuds.push_back(sequenceSi);
-    while(m_lecteur.getSymbole()=="sinon"){
-        if (m_lecteur.getSymbole()=="sinonsi"){
-            testerEtAvancer("sinonsi");
-            testerEtAvancer("(");
-            Noeud* conditionSinonSi = expression();
-            vectNoeuds.push_back(conditionSinonSi);
-            testerEtAvancer(")");
-            Noeud* sequenceSinonSi = seqInst();
-            vectNoeuds.push_back(sequenceSinonSi);
-        }
-    }
-    testerEtAvancer("sinon");
-    Noeud* sequenceSinon = seqInst();
-    vectNoeuds.push_back(sequenceSinon);
-    testerEtAvancer("finsi");
+    Noeud* sequenceSi = seqInst(); // séquence d'instruction du Si
+    noeuds.push_back(sequenceSi); // on met la séqyuence dans le vecteur de noeuds
     
-    return nullptr;
-    //return new NoeudInstSiRiche(vectNoeuds); on retourne un noeud de l'instruction si riche .
+    while(m_lecteur.getSymbole()=="sinonsi"){
+        testerEtAvancer("sinonsi");
+        testerEtAvancer("(");
+        Noeud* conditionSinonSi = expression(); 
+        noeuds.push_back(conditionSinonSi);// on stocke la condition dans le vecteur de noeuds
+        testerEtAvancer(")");
+        Noeud* sequenceSinonSi = seqInst();
+        noeuds.push_back(sequenceSinonSi); // on stocke la sequence dans le vecteur de noeuds
+    }
+    // pas forcément un sinon.
+    testerEtAvancer("sinon"); // le sinon n'a pas de condition, on se servira de cette différence pour le repérer dans le vecteur
+    Noeud* sequenceSinon = seqInst(); 
+    testerEtAvancer("finsi");
+    return new NoeudInstSiRiche(noeuds);
 }
 
 Noeud* Interpreteur::instPour() {
@@ -246,7 +245,9 @@ Noeud* Interpreteur::instEcrire() {
         noeud = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
         m_lecteur.avancer();
         
-    }else if(m_lecteur.getSymbole() == "<ENTIER>")
+    }else if(m_lecteur.getSymbole() == "<ENTIER>"){ // si le symbole lu est un entier , ça veut dire que c'est une expression
+        noeud = expression();
+    }
     
     vector<Noeud*> noeudsSupp;
     
@@ -260,6 +261,8 @@ Noeud* Interpreteur::instEcrire() {
             noeud2 = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
             m_lecteur.avancer();
             noeudsSupp.push_back(noeud2);
+        }else if(m_lecteur.getSymbole() == "<ENTIER>"){ // si le symbole lu est un entier , ça veut dire que c'est une expression
+            noeud = expression();
         }
     }
     testerEtAvancer(")");
