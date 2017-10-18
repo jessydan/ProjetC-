@@ -1,17 +1,6 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-i=3;
-si(i<=2)
-ecrire("i2 = ",i);
-sinonsi(i>=3)
-ecrire("i3 = ",i);
-sinonsi(i==12)
-ecrire("r");
-sinon
-ecrire("dzl gros");
-finsi
-
 
 finproc
 # Commentaire Final

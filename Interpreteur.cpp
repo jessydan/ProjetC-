@@ -178,7 +178,7 @@ Noeud* Interpreteur::instRepeter() {
     return new NoeudInstRepeter(sequence, condition); // on retourne un noeud de l'instruction répeter
 }
 
-Noeud* Interpreteur::instSiRiche() { // revoir le vecteur
+Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez de noeuds
 // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
     vector<Noeud*> noeuds;
     
@@ -202,6 +202,8 @@ Noeud* Interpreteur::instSiRiche() { // revoir le vecteur
     // pas forcément un sinon.
     testerEtAvancer("sinon"); // le sinon n'a pas de condition, on se servira de cette différence pour le repérer dans le vecteur
     Noeud* sequenceSinon = seqInst(); 
+    noeuds.push_back(sequenceSinon);
+    
     testerEtAvancer("finsi");
     return new NoeudInstSiRiche(noeuds);
 }
