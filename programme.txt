@@ -1,7 +1,13 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-i=1;
-ecrire("i=",i,"test d'une seconde chaine","test d'une trosieme chiane");
+
+j=1;
+pour(;j<3;)
+ecrire(3-);
+j = j+1;
+finpour
+
+
 finproc
 # Commentaire Final

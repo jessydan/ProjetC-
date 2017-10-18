@@ -58,7 +58,8 @@ Noeud* Interpreteur::seqInst() {
   do {
     sequence->ajoute(inst());
   } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" 
-          || m_lecteur.getSymbole()=="repeter" || m_lecteur.getSymbole()=="pour" || m_lecteur.getSymbole()== "ecrire");
+          || m_lecteur.getSymbole()=="repeter" || m_lecteur.getSymbole()=="pour" || m_lecteur.getSymbole()== "ecrire"
+          || m_lecteur.getSymbole()=="lire");
  
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -79,10 +80,12 @@ Noeud* Interpreteur::inst() {
     return instTantQue();
   else if (m_lecteur.getSymbole() == "repeter")
       return instRepeter();
-  //else if (m_lecteur.getSymbole() == "pour")
-        //      return instPour();
+  else if (m_lecteur.getSymbole() == "pour")
+              return instPour();
   else if (m_lecteur.getSymbole() == "ecrire")
       return instEcrire();
+  else if (m_lecteur.getSymbole() == "lire")
+      return instLire();
   // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
   else erreur("Instruction incorrecte");
 }
@@ -203,20 +206,20 @@ Noeud* Interpreteur::instSiRiche() {
     return nullptr;
     //return new NoeudInstSiRiche(vectNoeuds); on retourne un noeud de l'instruction si riche .
 }
-/*
+
 Noeud* Interpreteur::instPour() {
     // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
     testerEtAvancer("pour");
     testerEtAvancer("(");
-    Noeud* affectationDebut;
-    Noeud* affectationFin;
-    if(m_lecteur.getSymbole()=="<VARIABLE>"){
+    Noeud* affectationDebut=nullptr;
+    Noeud* affectationFin=nullptr;
+    if(m_lecteur.getSymbole()=="<VARIABLE>"){ // on regarde si le premier paramètre est une variable, si oui ça veut dire que celui-ci est une affectation
         affectationDebut = affectation();
     }
+    testerEtAvancer(";"); // on avance au paramètre suivant
+    Noeud* conditionArret = expression(); // la condition d'arret et forcément une expression
     testerEtAvancer(";");
-    Noeud* conditionArret = expression();
-    testerEtAvancer(";");
-    if(m_lecteur.getSymbole()=="<VARIABLE>"){
+    if(m_lecteur.getSymbole()=="<VARIABLE>"){ // on regarde si le dernier paramètre est une variable, si oui ça veut dire que celui-ci est une affectation
         affectationFin = affectation();
     }
     testerEtAvancer(")");
@@ -225,7 +228,7 @@ Noeud* Interpreteur::instPour() {
     
     return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
 }
- */
+ 
 
 Noeud* Interpreteur::instEcrire() {
     // <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
@@ -243,14 +246,14 @@ Noeud* Interpreteur::instEcrire() {
         noeud = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
         m_lecteur.avancer();
         
-    }
+    }else if(m_lecteur.getSymbole() == "<ENTIER>")
     
     vector<Noeud*> noeudsSupp;
     
     while(m_lecteur.getSymbole()==","){ // on regarde si il y a d'autres choses à écrire
         testerEtAvancer(",");
         if (m_lecteur.getSymbole()=="<VARIABLE>"){ // si le symoble est en entier alors c'est un début d'expression
-            Noeud* noeud2 = expression();
+            Noeud* noeud2 = expression(); 
             noeudsSupp.push_back(noeud2);
 
         }else if (m_lecteur.getSymbole() == "<CHAINE>") {
@@ -263,4 +266,31 @@ Noeud* Interpreteur::instEcrire() {
     testerEtAvancer(";");
     //return nullptr;
     return new NoeudInstEcrire(noeud,noeudsSupp); // on retourn un noeud inst Ecrire
+}
+
+Noeud* Interpreteur::instLire(){
+    // <instLire>    ::= lire ( <variable> {, <variable> })
+    Noeud* noeud = nullptr;
+    Noeud* noeud2 =nullptr;
+    vector<Noeud*> noeudsLireSupp;
+    testerEtAvancer("lire");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole() == "<VARIABLE>"){ // si lecteur lit bien un sylbole de type VARIABLE
+        noeud = m_table.chercheAjoute(m_lecteur.getSymbole());//on ajoute la variable à la table de symbole values
+        m_lecteur.avancer();
+    }
+    
+    while (m_lecteur.getSymbole()==","){ // tant qu'il y a de variables à lire
+        testerEtAvancer(",");
+        if (m_lecteur.getSymbole() == "<VARIABLE>"){ // si lecteur lit bien un sylbole de type VARIABLE
+            noeud2 = m_table.chercheAjoute(m_lecteur.getSymbole());//on ajoute la variable à la table de symbole values
+            noeudsLireSupp.push_back(noeud2);
+            m_lecteur.avancer();
+        }
+    }
+    testerEtAvancer(")");
+    testerEtAvancer(";");
+    
+    //return nullptr;
+    return new NoeudInstLire(noeud,noeudsLireSupp);
 }

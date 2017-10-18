@@ -128,23 +128,25 @@ int NoeudInstSiRiche::executer() {
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstPour
 ////////////////////////////////////////////////////////////////////////////////
-/*
-NoeudInstPour::NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence) 
-:m_affectationDebut(affectationDebut), m_affectationFin(affectationFin), m_conditionArret(conditionArret), m_sequence(sequence){
-}
+
+
+
+NoeudInstPour::NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence)
+:NoeudInstTantQue(conditionArret,sequence), m_affectationDebut(affectationDebut){ 
+    if(affectationFin!=nullptr){
+        m_sequence->ajoute(affectationFin); // on ajoute l'incrémentation à la séquence.
+    }
+}//
 
 int NoeudInstPour::executer() {
-    if(m_affectationDebut==nullptr || m_affectationFin==nullptr){
-        for (m_conditionArret->executer()){
-            m_sequence->executer();
-        }
-    }else{
-        for (m_affectationDebut->executer();m_conditionArret->executer();m_affectationFin->executer()){
-            m_sequence->executer();
-        }
+    if(m_affectationDebut!=nullptr){ // si la premiere affectation n'est pas nulle
+        m_affectationDebut->executer(); // créer l'affectation
     }
+    NoeudInstTantQue::executer();
+    
+    return 0;
 }
-*/
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstEcrire
 ////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +175,30 @@ int NoeudInstEcrire::executer() {
             cout << p->executer(); // on affiche le résultat
         }
     }
-    
-     
+return 0;    
 }
+
+NoeudInstLire::NoeudInstLire(Noeud* noeud, vector<Noeud*> noeuds)
+:m_noeud(noeud), m_noeudsSupp(noeuds){
+}
+
+int NoeudInstLire::executer() {
+ // lire va récuper les valeurs dans la console et va les assigner a ses variables mise en parametres
+    Noeud* p;
+    p=m_noeud; // on pointe sur le noeud m_noeud
+    int varTemp=0;
+   
+    cin >> varTemp; //on dnne une valeur a un entier temporaire via la saisie de l'utilisateur
+    ((SymboleValue*)p)->setValeur(varTemp); // on initialise la valeur de la variable avec l'entier temporaire
+    
+    for(int i=0; i<m_noeudsSupp.size(); i++){
+        p=m_noeudsSupp[i]; // on fait pointer p sur l'element courant du vecteur
+        cin >> varTemp;
+        ((SymboleValue*)p)->setValeur(varTemp);
+    }
+    
+    return 0;
+}
+
+
 

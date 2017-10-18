@@ -91,7 +91,7 @@ class NoeudInstTantQue : public Noeud {
    ~NoeudInstTantQue() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction TantQue : TantQue condition vraie on exécute la séquence
 
-  private:
+  protected:
     Noeud*  m_condition;
     Noeud*  m_sequence;
 };
@@ -128,21 +128,18 @@ class NoeudInstSiRiche : public Noeud {
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-class NoeudInstPour : public Noeud {
+class NoeudInstPour :  public NoeudInstTantQue { // on hérite de tant que pour le cas ou pour n'aura que la condition d'arrêt en paramètre
 // Classe pour représenter un noeud "instruction pour"
 //  et ses 4 fils : l'affectation du début du pour, la condition d'arrêt du pour, l'affectation de fin du pour ,et la séquence d'instruction
   public:
     NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence);
      // Construit une instruction Pour avec les noeuds mis en paramètre.
-   ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
+   ~NoeudInstPour()  {}; // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction Pour : Pour (affectationDebut; condition d'arret, affectationFin) on exécute la séquence
     
 
   private:
-    Noeud*  m_conditionArret;
-    Noeud*  m_sequence;
     Noeud*  m_affectationDebut;
-    Noeud*  m_affectationFin;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -154,6 +151,22 @@ class NoeudInstEcrire : public Noeud {
      // Construit une instruction ecrire avec les vector de noeuds mis en paramètre.
    ~NoeudInstEcrire() {}; // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction ecrire : ecris ( <expression> | <chaine> puis potentiellement d'autres)
+    
+
+  private:
+      Noeud* m_noeud;
+      std::vector<Noeud*> m_noeudsSupp;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+class NoeudInstLire : public Noeud {
+// Classe pour représenter un noeud "instruction lire"
+//  et son fils : noeud *
+  public:
+    NoeudInstLire(Noeud* noeud, std::vector<Noeud*> noeuds);
+     // Construit une instruction lire avec le noeud mis en paramètre.
+   ~NoeudInstLire() {}; // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction lire : lis les variabels inscirs en paramètres
     
 
   private:
