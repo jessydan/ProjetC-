@@ -19,7 +19,7 @@ void Interpreteur::tester(const string & symboleAttendu) const throw (SyntaxeExc
             "Ligne %d, Colonne %d - Erreur de syntaxe - Symbole attendu : %s - Symbole trouvé : %s",
             m_lecteur.getLigne(), m_lecteur.getColonne(),
             symboleAttendu.c_str(), m_lecteur.getSymbole().getChaine().c_str());
-    throw SyntaxeException(messageWhat);
+    throw SyntaxeException(messageWhat); // déclecnhe l'exception et arrête le programme
   }
 }
 
@@ -74,9 +74,19 @@ Noeud* Interpreteur::inst() {
     testerEtAvancer(";");
     return affect;
   }
-  else if (m_lecteur.getSymbole() == "si")
-    return instSiRiche();
-  else if (m_lecteur.getSymbole() == "tantque")
+  else if (m_lecteur.getSymbole() == "si"){
+      try{
+          instSiRiche();
+      }catch(SyntaxeException exceptSi){
+          string elementFaux = m_lecteur.getSymbole().getChaine(); // on recupere la chaine de l'element faux 
+          cout <<"c'est passe dans l'exception" << endl;
+          cout << "\nsymbole déclencheur de l'exception : " << m_lecteur.getSymbole().getChaine() << endl;
+          while (m_lecteur.getSymbole().getChaine()== elementFaux){
+              m_lecteur.avancer();
+          }
+      }
+      return instSiRiche();
+  }else if (m_lecteur.getSymbole() == "tantque")
     return instTantQue();
   else if (m_lecteur.getSymbole() == "repeter")
       return instRepeter();
@@ -180,6 +190,8 @@ Noeud* Interpreteur::instRepeter() {
 
 Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez de noeuds
 // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
+// le vecteur contiendra condition|séquence|condition|...|séquence
+    
     vector<Noeud*> noeuds;
     
     testerEtAvancer("si");
@@ -200,9 +212,12 @@ Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez
         noeuds.push_back(sequenceSinonSi); // on stocke la sequence dans le vecteur de noeuds
     }
     // pas forcément un sinon.
-    testerEtAvancer("sinon"); // le sinon n'a pas de condition, on se servira de cette différence pour le repérer dans le vecteur
-    Noeud* sequenceSinon = seqInst(); 
-    noeuds.push_back(sequenceSinon);
+    if (m_lecteur.getSymbole()=="sinon"){
+        testerEtAvancer("sinon"); // le sinon n'a pas de condition, on se servira de cette différence pour le repérer dans le vecteur
+        Noeud* sequenceSinon = seqInst(); 
+        noeuds.push_back(sequenceSinon);
+    }
+    
     
     testerEtAvancer("finsi");
     return new NoeudInstSiRiche(noeuds);
