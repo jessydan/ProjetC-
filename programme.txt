@@ -1,13 +1,9 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-i=0;
-si i==1)
-ecrire("ca ne devrait pas s'afficher");
-sinonsi (i==2)
-ecrire("balec");
-sinon
+i=2;
+pour(j=4; j<13; j=i+1)
 ecrire("jsp");
-finsi
+finpour
 finproc
 # Commentaire Final

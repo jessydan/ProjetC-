@@ -76,8 +76,8 @@ Noeud* Interpreteur::inst() {
   }
   else if (m_lecteur.getSymbole() == "si"){
       try{
-          instSiRiche();
-      }catch(SyntaxeException exceptSi){
+          instSiRiche(); // si instSiRiche déclenche une erreur de syntaxe
+      }catch(SyntaxeException exceptSi){ //on récupère cette erreur
           string elementFaux = m_lecteur.getSymbole().getChaine(); // on recupere la chaine de l'element faux 
           cout <<"c'est passe dans l'exception" << endl;
           cout << "\nsymbole déclencheur de l'exception : " << m_lecteur.getSymbole().getChaine() << endl;
@@ -106,7 +106,9 @@ Noeud* Interpreteur::affectation() {
   Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table eton la mémorise
   m_lecteur.avancer();
   testerEtAvancer("=");
+  cout << m_lecteur.getSymbole().getChaine() << endl;
   Noeud* exp = expression();             // On mémorise l'expression trouvée
+  
   return new NoeudAffectation(var, exp); // On renvoie un noeud affectation
 }
 
@@ -223,26 +225,24 @@ Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez
     return new NoeudInstSiRiche(noeuds);
 }
 
-Noeud* Interpreteur::instPour() {
+Noeud* Interpreteur::instPour() { // pour à corriger
     // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
     testerEtAvancer("pour");
     testerEtAvancer("(");
     Noeud* affectationDebut=nullptr;
     Noeud* affectationFin=nullptr;
-    if(m_lecteur.getSymbole()=="<VARIABLE>"){ // on regarde si le premier paramètre est une variable, si oui ça veut dire que celui-ci est une affectation
-        affectationDebut = affectation();
-    }
+    
+    affectationDebut = affectation();
     testerEtAvancer(";"); // on avance au paramètre suivant
     Noeud* conditionArret = expression(); // la condition d'arret et forcément une expression
     testerEtAvancer(";");
-    if(m_lecteur.getSymbole()=="<VARIABLE>"){ // on regarde si le dernier paramètre est une variable, si oui ça veut dire que celui-ci est une affectation
-        affectationFin = affectation();
-    }
+    
+    affectationFin = affectation();
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
-    
-    return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
+    return nullptr;
+    //return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
 }
  
 
@@ -255,14 +255,11 @@ Noeud* Interpreteur::instEcrire() {
 
     
     
-    if (m_lecteur.getSymbole()=="<VARIABLE>"){ // si le symoble est en entier alors c'est un début d'expression
-        noeud = expression();
-
-    }else if (m_lecteur.getSymbole() == "<CHAINE>") {
+    if (m_lecteur.getSymbole() == "<CHAINE>") {
         noeud = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
         m_lecteur.avancer();
         
-    }else if(m_lecteur.getSymbole() == "<ENTIER>"){ // si le symbole lu est un entier , ça veut dire que c'est une expression
+    }else{ // si le symbole lu est un entier , ça veut dire que c'est une expression
         noeud = expression();
     }
     
@@ -270,16 +267,13 @@ Noeud* Interpreteur::instEcrire() {
     
     while(m_lecteur.getSymbole()==","){ // on regarde si il y a d'autres choses à écrire
         testerEtAvancer(",");
-        if (m_lecteur.getSymbole()=="<VARIABLE>"){ // si le symoble est en entier alors c'est un début d'expression
-            Noeud* noeud2 = expression(); 
-            noeudsSupp.push_back(noeud2);
-
-        }else if (m_lecteur.getSymbole() == "<CHAINE>") {
+        if (m_lecteur.getSymbole() == "<CHAINE>") {
             noeud2 = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
             m_lecteur.avancer();
             noeudsSupp.push_back(noeud2);
-        }else if(m_lecteur.getSymbole() == "<ENTIER>"){ // si le symbole lu est un entier , ça veut dire que c'est une expression
+        }else { // si le symbole lu est un entier , ça veut dire que c'est une expression
             noeud = expression();
+            noeudsSupp.push_back(noeud);
         }
     }
     testerEtAvancer(")");

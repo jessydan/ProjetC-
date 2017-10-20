@@ -156,7 +156,7 @@ NoeudInstPour::NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noe
 
 int NoeudInstPour::executer() {
     if (m_affectationDebut != nullptr) { // si la premiere affectation n'est pas nulle
-        m_affectationDebut->executer(); // créer l'affectation
+        m_affectationDebut->executer(); // créer l'affectation i=0;
     }
     NoeudInstTantQue::executer();
 
