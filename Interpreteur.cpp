@@ -69,36 +69,36 @@ Noeud* Interpreteur::seqInst() {
 
 Noeud* Interpreteur::inst() {
   // <inst> ::= <affectation>  ; | <instSi> | <instTantQue> 
-  if (m_lecteur.getSymbole() == "<VARIABLE>") {
-    Noeud *affect = affectation();
-    testerEtAvancer(";");
-    return affect;
-  }
-  else if (m_lecteur.getSymbole() == "si"){
-      try{
-          instSiRiche(); // si instSiRiche déclenche une erreur de syntaxe
-      }catch(SyntaxeException exceptSi){ //on récupère cette erreur
-          string elementFaux = m_lecteur.getSymbole().getChaine(); // on recupere la chaine de l'element faux 
-          cout <<"c'est passe dans l'exception" << endl;
-          cout << "\nsymbole déclencheur de l'exception : " << m_lecteur.getSymbole().getChaine() << endl;
-          while (m_lecteur.getSymbole().getChaine()== elementFaux){
-              m_lecteur.avancer();
-          }
-      }
-      return instSiRiche();
-  }else if (m_lecteur.getSymbole() == "tantque")
-    return instTantQue();
-  else if (m_lecteur.getSymbole() == "repeter")
-      return instRepeter();
-  else if (m_lecteur.getSymbole() == "pour")
-              return instPour();
-  else if (m_lecteur.getSymbole() == "ecrire")
-      return instEcrire();
-  else if (m_lecteur.getSymbole() == "lire")
-      return instLire();
-  // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
-  else erreur("Instruction incorrecte");
+    try{
+        if (m_lecteur.getSymbole() == "<VARIABLE>") {
+            Noeud *affect = affectation();
+            testerEtAvancer(";");
+            return affect;
+        }else if (m_lecteur.getSymbole() == "si"){
+              return instSiRiche();
+        }else if (m_lecteur.getSymbole() == "tantque"){
+            return instTantQue();
+        }else if (m_lecteur.getSymbole() == "repeter"){
+            return instRepeter();
+        }else if (m_lecteur.getSymbole() == "pour"){
+            return instPour();
+        }else if (m_lecteur.getSymbole() == "ecrire"){
+            return instEcrire();
+        }else if (m_lecteur.getSymbole() == "lire"){
+            return instLire();
+        }else{
+            erreur("Instruction incorrecte");
+        }
+    }catch(SyntaxeException e){ // on récupère l'exception qui a été levée
+        cout << "Exception relevé dans le try inst"<< endl;
+        while(m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+           m_lecteur.avancer();
+           cout << "symbole lu par le lecteur : " << m_lecteur.getSymbole().getChaine() << endl;
+        }
+        throw;
+    }
 }
+  
 
 Noeud* Interpreteur::affectation() {
   // <affectation> ::= <variable> = <expression> 
@@ -229,20 +229,18 @@ Noeud* Interpreteur::instPour() { // pour à corriger
     // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
     testerEtAvancer("pour");
     testerEtAvancer("(");
-    Noeud* affectationDebut=nullptr;
-    Noeud* affectationFin=nullptr;
     
-    affectationDebut = affectation();
+    Noeud* affectationDebut = affectation();
     testerEtAvancer(";"); // on avance au paramètre suivant
     Noeud* conditionArret = expression(); // la condition d'arret et forcément une expression
     testerEtAvancer(";");
     
-    affectationFin = affectation();
+    Noeud* affectationFin = affectation();
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
-    return nullptr;
-    //return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
+    //return nullptr;
+    return new NoeudInstPour(affectationDebut,conditionArret,affectationFin,sequence); // on retourne un noeud de l'instruction pour
 }
  
 
@@ -253,8 +251,6 @@ Noeud* Interpreteur::instEcrire() {
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
 
-    
-    
     if (m_lecteur.getSymbole() == "<CHAINE>") {
         noeud = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
         m_lecteur.avancer();

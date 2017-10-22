@@ -2,8 +2,8 @@
 # Les lignes de commentaires commencent par #
 procedure principale()
 i=2;
-pour(j=4; j<13; j=i+1)
-ecrire("jsp");
-finpour
+tantque i<=3
+i=i+1
+fintanque
 finproc
 # Commentaire Final
