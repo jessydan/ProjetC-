@@ -5,5 +5,10 @@ i=2;
 tantque i<=3
 i=i+1
 fintanque
+
+pour(j=0; j<5; j=j+1
+ecrire("test");
+finpour
+
 finproc
 # Commentaire Final

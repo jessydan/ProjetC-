@@ -91,9 +91,10 @@ Noeud* Interpreteur::inst() {
         }
     }catch(SyntaxeException e){ // on récupère l'exception qui a été levée
         cout << "Exception relevé dans le try inst"<< endl;
-        while(m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+        while((m_lecteur.getSymbole()!="si"||m_lecteur.getSymbole()!="tantque"||m_lecteur.getSymbole()!="pour"||
+               m_lecteur.getSymbole()!="ecrire"||m_lecteur.getSymbole()!="lire") && m_lecteur.getSymbole()!="<FINDEFICHIER>")
+        {
            m_lecteur.avancer();
-           cout << "symbole lu par le lecteur : " << m_lecteur.getSymbole().getChaine() << endl;
         }
         throw;
     }
