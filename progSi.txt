@@ -1,0 +1,15 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+
+i=0;
+si(i==3)
+ecrire("i=3");
+sinonsi(i==4)
+ecrire("i=4");
+sinon
+ecrire("sinon");
+finsi
+
+finproc
+# Commentaire Final

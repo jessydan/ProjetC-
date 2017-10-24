@@ -40,11 +40,16 @@ void Interpreteur::erreur(const string & message) const throw (SyntaxeException)
 }
 
 void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
-  cout << setw(4*indentation)<<""<<"int main() {"<< endl;
+  cout << setw(4*indentation)<<""<<"\nint main() {"<< endl;
     // Début d’un programme C++
     // Ecrire en C++ la déclaration des variables présentes dans le programme... 
-    // ... variables dont on retrouvera le nom en parcourant la table des symboles ! 
-    // Par exemple, si le programme contient i,j,k, il faudra écrire : int i; int j; int k; ... 
+  for (int i = 0 ; i < m_table.getTaille() ; i++){
+      if (m_table[i]=="<VARIABLE>"){
+          cout << setw(4* (indentation+1)) << "" << "int " << m_table[i].getChaine()<<";"<<endl;
+      }
+      
+  }
+  cout << "test" << endl;
   getArbre()->traduitEnCPP(cout,indentation+1);// lance l'opération traduitEnCPP sur la racine
   cout << setw(4*(indentation+1))<<""<<"return 0;"<< endl ; 
   cout << setw(4*indentation)<<"}" << endl ; // Fin d’un programme C++
@@ -56,7 +61,7 @@ Noeud* Interpreteur::programme() {
   testerEtAvancer("principale");
   testerEtAvancer("(");
   testerEtAvancer(")");
- Noeud* sequence = seqInst();
+  Noeud* sequence = seqInst();
   testerEtAvancer("finproc");
   tester("<FINDEFICHIER>");
   return sequence;
@@ -103,7 +108,7 @@ Noeud* Interpreteur::inst() {
     }catch(SyntaxeException const& e){ // on récupère l'exception qui a été levée
         cout << e.what() << endl;
         while((m_lecteur.getSymbole()!="si"&& m_lecteur.getSymbole()!="tantque" && m_lecteur.getSymbole()!="pour" &&
-               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire" ) && m_lecteur.getSymbole()!="<FINDEFICHIER>")
+               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire" && m_lecteur.getSymbole()!="finproc" ) && m_lecteur.getSymbole()!="<FINDEFICHIER>")
         {
            m_lecteur.avancer();
         }
