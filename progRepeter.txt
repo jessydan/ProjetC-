@@ -3,10 +3,10 @@
 procedure principale()
 
 i=0;
-tantque(i<=3)
-ecrire("test");
-i=i+1;
-fintantque
+repeter
+    i=i+1;
+    ecrire("testRepeter");
+jusqua (i==3)
 
 finproc
 # Commentaire Final

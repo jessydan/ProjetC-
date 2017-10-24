@@ -257,6 +257,7 @@ NoeudInstEcrire::NoeudInstEcrire(Noeud* noeudPremierElement, vector<Noeud*> noeu
 int NoeudInstEcrire::executer() {
     Noeud* p;
     p = m_noeud; // on pointe sur le noeud du premier element
+    
 
     // on regarde si l’objet pointé par p est de type SymboleValue et si c’est une chaîne
     if ((typeid (*p) == typeid (SymboleValue) && *((SymboleValue*) p) == "<CHAINE>")) {

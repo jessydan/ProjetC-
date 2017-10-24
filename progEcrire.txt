@@ -1,0 +1,14 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+i=10;
+j=3;
+k=4;
+ecrire("premier test");
+ecrire("second test","second test",k);
+
+ecrire("troisieme test", i+1);
+
+#ecrire("quatrième test", i+j,k); 
+finproc
+# Commentaire Final
