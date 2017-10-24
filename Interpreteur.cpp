@@ -39,6 +39,17 @@ void Interpreteur::erreur(const string & message) const throw (SyntaxeException)
   throw SyntaxeException(messageWhat);
 }
 
+void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
+  cout << setw(4*indentation)<<""<<"int main() {"<< endl;
+    // Début d’un programme C++
+    // Ecrire en C++ la déclaration des variables présentes dans le programme... 
+    // ... variables dont on retrouvera le nom en parcourant la table des symboles ! 
+    // Par exemple, si le programme contient i,j,k, il faudra écrire : int i; int j; int k; ... 
+  getArbre()->traduitEnCPP(cout,indentation+1);// lance l'opération traduitEnCPP sur la racine
+  cout << setw(4*(indentation+1))<<""<<"return 0;"<< endl ; 
+  cout << setw(4*indentation)<<"}" << endl ; // Fin d’un programme C++
+} 
+
 Noeud* Interpreteur::programme() {
   // <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER
   testerEtAvancer("procedure");
@@ -89,14 +100,13 @@ Noeud* Interpreteur::inst() {
         }else{
             erreur("Instruction incorrecte");
         }
-    }catch(SyntaxeException e){ // on récupère l'exception qui a été levée
-        cout << "Exception relevé dans le try inst"<< endl;
-        while((m_lecteur.getSymbole()!="si"||m_lecteur.getSymbole()!="tantque"||m_lecteur.getSymbole()!="pour"||
-               m_lecteur.getSymbole()!="ecrire"||m_lecteur.getSymbole()!="lire") && m_lecteur.getSymbole()!="<FINDEFICHIER>")
+    }catch(SyntaxeException const& e){ // on récupère l'exception qui a été levée
+        cout << e.what() << endl;
+        while((m_lecteur.getSymbole()!="si"&& m_lecteur.getSymbole()!="tantque" && m_lecteur.getSymbole()!="pour" &&
+               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire" ) && m_lecteur.getSymbole()!="<FINDEFICHIER>")
         {
            m_lecteur.avancer();
         }
-        throw;
     }
 }
   
@@ -107,7 +117,6 @@ Noeud* Interpreteur::affectation() {
   Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table eton la mémorise
   m_lecteur.avancer();
   testerEtAvancer("=");
-  cout << m_lecteur.getSymbole().getChaine() << endl;
   Noeud* exp = expression();             // On mémorise l'expression trouvée
   
   return new NoeudAffectation(var, exp); // On renvoie un noeud affectation

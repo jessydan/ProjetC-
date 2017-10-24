@@ -12,7 +12,13 @@ Symbole(s.getChaine()) {
   }
 }
 
-
+void SymboleValue::traduitEnCPP(ostream& cout, unsigned int indentation) {
+    if(this=="<CHAINE>"){
+        cout << this->getChaine() << endl;
+    }else{
+        cout << this->executer() << endl;
+    }
+}
 
 int SymboleValue::executer() {
   if (!m_defini) throw IndefiniException(); // on lève une exception si valeur non définie
