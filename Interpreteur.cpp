@@ -267,7 +267,7 @@ Noeud* Interpreteur::instEcrire() {
         noeud = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
         m_lecteur.avancer();
         
-    }else{ // si le symbole lu est un entier , ça veut dire que c'est une expression
+    }else{ // sinon c'est une expression
         noeud = expression();
     }
     
@@ -280,12 +280,14 @@ Noeud* Interpreteur::instEcrire() {
             m_lecteur.avancer();
             noeudsSupp.push_back(noeud2);
         }else { // si le symbole lu est un entier , ça veut dire que c'est une expression
-            noeud = expression();
-            noeudsSupp.push_back(noeud);
+            noeud2 = expression();
+            noeudsSupp.push_back(noeud2);
         }
     }
     testerEtAvancer(")");
     testerEtAvancer(";");
+    
+    cout << "taille du vecteur d'écrire" << noeudsSupp.size() << endl;
     //return nullptr;
     return new NoeudInstEcrire(noeud,noeudsSupp); // on retourn un noeud inst Ecrire
 }

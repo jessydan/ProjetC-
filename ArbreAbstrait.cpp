@@ -257,19 +257,18 @@ NoeudInstEcrire::NoeudInstEcrire(Noeud* noeudPremierElement, vector<Noeud*> noeu
 int NoeudInstEcrire::executer() {
     Noeud* p;
     p = m_noeud; // on pointe sur le noeud du premier element
-    
 
     // on regarde si l’objet pointé par p est de type SymboleValue et si c’est une chaîne
-    if ((typeid (*p) == typeid (SymboleValue) && *((SymboleValue*) p) == "<CHAINE>")) {
-        cout << ((SymboleValue*) p)->getChaine(); //on affiche la chaine de caractere
+    if ((typeid (*p) == typeid (SymboleValue)) && (*((SymboleValue*) p) == "<CHAINE>" )) {
+        cout << ((SymboleValue*) p)->getChaine() ; //on affiche la chaine de caractere
     } else {
-        cout << p->executer(); // on affiche le résultat
+        cout << p->executer() ; // on affiche le résultat
     }
 
     for (int i = 0; i < m_noeudsSupp.size(); i++) {
         cout << " , ";
         p = m_noeudsSupp[i]; // on fait pointer p sur l'element courant du vecteur
-        if ((typeid (*p) == typeid (SymboleValue) && *((SymboleValue*) p) == "<CHAINE>")) {
+        if ((typeid (*p) == typeid (SymboleValue)) && (*((SymboleValue*) p) == "<CHAINE>" )) {
             cout << ((SymboleValue*) p)->getChaine(); //on affiche la chaine de caractere
         } else {
             cout << p->executer(); // on affiche le résultat

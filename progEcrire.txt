@@ -4,11 +4,9 @@ procedure principale()
 i=10;
 j=3;
 k=4;
-ecrire("premier test");
-ecrire("second test","second test",k);
-
+ecrire(k);
+ecrire("seconde test","secondParam test","troisiemePAram test",k);
 ecrire("troisieme test", i+1);
-
-#ecrire("quatrième test", i+j,k); 
+ecrire("quatrième test", i+j,k); 
 finproc
 # Commentaire Final
