@@ -41,15 +41,12 @@ void Interpreteur::erreur(const string & message) const throw (SyntaxeException)
 
 void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
   cout << setw(4*indentation)<<""<<"\nint main() {"<< endl;
-    // Début d’un programme C++
-    // Ecrire en C++ la déclaration des variables présentes dans le programme... 
-  for (int i = 0 ; i < m_table.getTaille() ; i++){
+  
+  for (int i = 0 ; i < m_table.getTaille() ; i++){ // pour écrire int i; int j; etc...
       if (m_table[i]=="<VARIABLE>"){
           cout << setw(4* (indentation+1)) << "" << "int " << m_table[i].getChaine()<<";"<<endl;
       }
-      
   }
-  cout << "test" << endl;
   getArbre()->traduitEnCPP(cout,indentation+1);// lance l'opération traduitEnCPP sur la racine
   cout << setw(4*(indentation+1))<<""<<"return 0;"<< endl ; 
   cout << setw(4*indentation)<<"}" << endl ; // Fin d’un programme C++

@@ -46,10 +46,9 @@ class NoeudAffectation : public Noeud {
 //  composé de 2 fils : la variable et l'expression qu'on lui affecte
   public:
      NoeudAffectation(Noeud* variable, Noeud* expression); // construit une affectation
-    ~NoeudAffectation() {} // A cause du destructeur virtuel de la classe Noeud
+    ~NoeudAffectation(); // A cause du destructeur virtuel de la classe Noeud
     int executer();        // Exécute (évalue) l'expression et affecte sa valeur à la variable
     void traduitEnCPP(ostream& cout, unsigned int indentation) const;
-
   private:
     Noeud* m_variable;
     Noeud* m_expression;
