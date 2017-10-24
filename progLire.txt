@@ -1,0 +1,14 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+i=0;
+j=0;
+k=0;
+
+ecrire("Veuillez rentrez la valeur de i :");
+lire(i);
+
+ecrire("Veuillez rentrez les valeurs de j et de k :");
+lire(j,k);
+finproc
+# Commentaire Final

@@ -287,8 +287,6 @@ Noeud* Interpreteur::instEcrire() {
     testerEtAvancer(")");
     testerEtAvancer(";");
     
-    cout << "taille du vecteur d'écrire" << noeudsSupp.size() << endl;
-    //return nullptr;
     return new NoeudInstEcrire(noeud,noeudsSupp); // on retourn un noeud inst Ecrire
 }
 
