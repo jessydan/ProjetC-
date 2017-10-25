@@ -40,7 +40,10 @@ void Interpreteur::erreur(const string & message) const throw (SyntaxeException)
 }
 
 void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
-  cout << setw(4*indentation)<<""<<"\nint main() {"<< endl;
+    cout << "\n\n===================TRADUCTION EN C++================\n"<<endl;
+    cout << setw(4*indentation)<<""<<"#include <iostream>"<<endl;
+    cout << setw(4*indentation)<<""<<"using namespace std"<<endl;
+    cout << setw(4*indentation)<<""<<"\nint main() {"<< endl;
   
   for (int i = 0 ; i < m_table.getTaille() ; i++){ // pour écrire int i; int j; etc...
       if (m_table[i]=="<VARIABLE>"){
@@ -48,7 +51,7 @@ void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
       }
   }
   getArbre()->traduitEnCPP(cout,indentation+1);// lance l'opération traduitEnCPP sur la racine
-  cout << setw(4*(indentation+1))<<""<<"return 0;"<< endl ; 
+  cout <<"\n"<< setw(4*(indentation+1))<<""<<"return 0;"<< endl ; 
   cout << setw(4*indentation)<<"}" << endl ; // Fin d’un programme C++
 } 
 
@@ -192,9 +195,7 @@ Noeud* Interpreteur::instTantQue() {
 Noeud* Interpreteur::instRepeter() {
 // <instTepeter> ::= repeter <seqInst> jusqua( <expression> )
     testerEtAvancer("repeter");
-    testerEtAvancer("(");
     Noeud* sequence = seqInst(); // on mémorise la sequence d'instruction
-    testerEtAvancer(")");
     testerEtAvancer("jusqua");
     testerEtAvancer("(");
     Noeud* condition = expression(); // on mémorise la condition

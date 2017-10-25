@@ -6,7 +6,7 @@ i=0;
 repeter
     i=i+1;
     ecrire("testRepeter");
-jusqua (i==3)
+jusqua (i<=3)
 
 finproc
 # Commentaire Final

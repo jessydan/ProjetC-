@@ -2,8 +2,8 @@
 # Les lignes de commentaires commencent par #
 procedure principale()
 
-pour(j=0; j<5; j=j+1
-ecrire("test";
+pour(j=0; j<5; j=j+1)
+ecrire("test");
 finpour
 
 finproc

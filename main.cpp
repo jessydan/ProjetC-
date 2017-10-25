@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 #include "Interpreteur.h"
 #include "Exceptions.h"
 
@@ -31,5 +32,77 @@ int main(int argc, char* argv[]) {
     cout << e.what() << endl;
     //throw; // repropagation de l'exception
   }
-  return 0;
+    return 0;
 }
+
+  //////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////  PARTIE TESTS CODES TRADUITS ////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////
+  
+  // TEST SI RICHE // test le code généré et le compile
+  /*
+    int main() {
+        int i;
+        i = 0;
+        if (i == 3) {
+            cout << "i=3" << endl;
+        }else if (i == 3) {
+            cout << "i=3" << endl;
+        }else if (i == 4) {
+            cout << "i=4" << endl;
+        }else {
+            cout << "sinon" << endl;
+        }
+
+        return 0;
+    }
+  
+  */ 
+  // TEST TANT QUE //
+  
+    /*
+     * 
+    int main() {
+        int i;
+        i = 0;
+        while (i <= 3) {
+            cout << "test" << endl;
+            i = i + 1;
+        }
+
+        return 0;
+    }
+    
+    */
+  
+  // TEST REPETER //
+  
+  /*
+    int main() {
+        int i;
+        i = 0;
+        do {
+            i = i + 1;
+            cout << "testRepeter" << endl;
+        } while (i <= 3);
+
+        return 0;
+    }
+
+   */
+  
+  // TEST POUR //
+  
+  
+  
+  // TEST LIRE //
+  
+  
+  
+  // TEST ECRIRE //
+  
+  
+  
+  
+  
+

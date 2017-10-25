@@ -49,7 +49,9 @@ int NoeudAffectation::executer() {
 
 void NoeudAffectation::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     m_variable->traduitEnCPP(cout,indentation);
-    cout << " = " << m_expression->executer() << ";";
+    cout << " = ";
+    m_expression->traduitEnCPP(cout, 0);
+    cout << ";";
 }
 
 
@@ -130,7 +132,6 @@ void NoeudInstTantQue::traduitEnCPP(ostream & cout,unsigned int indentation) con
     cout <<") {" <<endl;
     m_sequence->traduitEnCPP(cout, indentation+1); // on met la séquence on augmentant l'indentation
     cout << setw(4*indentation)<<""<<"}";
-    
 }
 
 
@@ -153,8 +154,8 @@ void NoeudInstRepeter::traduitEnCPP(ostream & cout,unsigned int indentation) con
     cout << setw(4*indentation)<<""<< "do {" << endl; // écris do avec un espace de 4* indentation
     m_sequence->traduitEnCPP(cout, indentation+1);
     cout << setw(4*indentation)<<""<< "} while (";
-    m_sequence->traduitEnCPP(cout, 0);
-    cout << ");"<< endl;
+    m_condition->traduitEnCPP(cout, 0);
+    cout << ");";
 }
 
 
@@ -197,20 +198,19 @@ void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) con
     cout << setw(4*indentation)<< "" << "}";// Ecrit "}" avec l'indentation initiale et passe à la ligne 
     
     while(i<m_vectNoeuds.size()-2){ // on parcours le vecteur
-        if(i!=m_vectNoeuds.size()-1){ // si on n'est pas sur le dernier élément
-            cout <<"else if ("; // il écrite à la suiàte de la précédente accolade
-            m_vectNoeuds.at(i)->traduitEnCPP(cout,0);
-            cout << ") {" << endl;
-            m_vectNoeuds.at(i+1)->traduitEnCPP(cout,indentation+1);
-            cout << setw(4*indentation)<<""<<"}";
-            i=i+2;
-        }else{ // si on est sur le dernier élément
-            cout<<"else {";
-            m_vectNoeuds.at(i)->traduitEnCPP(cout,0);
-            cout << "\n}" << endl;
-        }
+         // si on n'est pas sur le dernier élément
+        cout <<"else if ("; // il écrite à la suiàte de la précédente accolade
+        m_vectNoeuds.at(i)->traduitEnCPP(cout,0);
+        cout << ") {" << endl;
+        m_vectNoeuds.at(i+1)->traduitEnCPP(cout,indentation+1);
+        cout << setw(4*indentation)<<""<<"}";
+        i=i+2;
         
     }
+    
+    cout<<"else {"<<endl;
+    m_vectNoeuds.at(i)->traduitEnCPP(cout,indentation+1);
+    cout <<setw(4*indentation) <<""<< "}" ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -263,7 +263,7 @@ int NoeudInstEcrire::executer() {
 
     // on regarde si l’objet pointé par p est de type SymboleValue et si c’est une chaîne
     if ((typeid (*p) == typeid (SymboleValue)) && (*((SymboleValue*) p) == "<CHAINE>" )) {
-        cout << ((SymboleValue*) p)->getChaine() ; //on affiche la chaine de caractere
+        cout << ((SymboleValue*) p)->getChaine() ; //on affiche la chaine de caractere du symbole value de p
     } else {
         cout << p->executer() ; // on affiche le résultat
     }
@@ -288,8 +288,9 @@ void NoeudInstEcrire::traduitEnCPP(ostream & cout,unsigned int indentation) cons
     while(i<m_noeudsSupp.size()){
         cout <<" << ";
         m_noeudsSupp.at(i)->traduitEnCPP(cout, 0);
+        i++;
     }
-    cout <<setw(4*indentation)<< "<< endl;" ;
+    cout <<setw(4*indentation)<< " << endl;" ;
 }
 
 
@@ -322,12 +323,13 @@ int NoeudInstLire::executer() {
 
 void NoeudInstLire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     unsigned int i=0;
-    cout << "cin >> " ;
+    cout <<setw(4*indentation)<<""<< "cin >> " ;
     m_noeud->traduitEnCPP(cout, 0); // cin >> variable
     
     while(i<m_noeudsSupp.size()){ // si il y a plusieurs variables
         cout <<" >> ";
         m_noeudsSupp.at(i)->traduitEnCPP(cout, 0);
+        i++;
     }
     cout << ";" << endl;
 }
