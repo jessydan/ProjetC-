@@ -22,8 +22,11 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
     if (instruction != nullptr) m_instructions.push_back(instruction);
 }
 
-void NoeudSeqInst::traduitEnCPP(ostream& cout, unsigned int indentation) const {
-    //
+void NoeudSeqInst::traduitEnCPP(ostream & cout,unsigned int indentation) const {
+    for (unsigned int i = 0; i < m_instructions.size(); i++) {
+        m_instructions[i]->traduitEnCPP(cout, indentation); // on exécute chaque instruction de la séquence
+        cout << endl; // La valeur renvoyée ne représente rien !
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -44,9 +47,9 @@ int NoeudAffectation::executer() {
     return 0; // La valeur renvoyée ne représente rien !
 }
 
-void NoeudAffectation::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudAffectation::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     m_variable->traduitEnCPP(cout,indentation);
-    cout << " = " << m_expression->executer() << endl;
+    cout << " = " << m_expression->executer() << ";";
 }
 
 
@@ -82,7 +85,7 @@ int NoeudOperateurBinaire::executer() {
     return valeur; // On retourne la valeur calculée
 }
 
-void NoeudOperateurBinaire::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudOperateurBinaire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     m_operandeGauche->traduitEnCPP(cout,0);
     cout << " "<< m_operateur.getChaine() <<" ";
     m_operandeDroit->traduitEnCPP(cout, 0);
@@ -102,7 +105,7 @@ int NoeudInstSi::executer() {
     return 0; // La valeur renvoyée ne représente rien !
 }
 
-void NoeudInstSi::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudInstSi::traduitEnCPP(ostream & cout,unsigned int indentation) const {
 }
 
 
@@ -121,12 +124,12 @@ int NoeudInstTantQue::executer() {
     return 0; // La valeur renvoyée ne représente rien !
 }
 
-void NoeudInstTantQue::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudInstTantQue::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     cout << setw(4*indentation)<<""<<"while ("; 
     m_condition->traduitEnCPP(cout, 0);// on met la condition d'arrêt dans les paramètres du while
     cout <<") {" <<endl;
     m_sequence->traduitEnCPP(cout, indentation+1); // on met la séquence on augmentant l'indentation
-    cout << setw(4*indentation)<<""<<"}"<<endl;
+    cout << setw(4*indentation)<<""<<"}";
     
 }
 
@@ -146,7 +149,7 @@ int NoeudInstRepeter::executer() {
     return 0;
 }
 
-void NoeudInstRepeter::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudInstRepeter::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     cout << setw(4*indentation)<<""<< "do {" << endl; // écris do avec un espace de 4* indentation
     m_sequence->traduitEnCPP(cout, indentation+1);
     cout << setw(4*indentation)<<""<< "} while (";
@@ -230,7 +233,7 @@ int NoeudInstPour::executer() {
     return 0;
 }
 
-void NoeudInstPour::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudInstPour::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     cout << setw(4*indentation) << "while ("<< endl;
     if(m_affectationDebut != nullptr){
         m_affectationDebut->traduitEnCPP(cout, 0); // on met l'affectation dans les parametres du while
@@ -277,16 +280,16 @@ int NoeudInstEcrire::executer() {
     return 0;
 }
 
-void NoeudInstEcrire::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudInstEcrire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     unsigned int i=0;
-    cout << "cout << " ;
+    cout <<setw(4*indentation)<<"" <<"cout << " ;
     m_noeud->traduitEnCPP(cout, 0);
     
     while(i<m_noeudsSupp.size()){
         cout <<" << ";
         m_noeudsSupp.at(i)->traduitEnCPP(cout, 0);
     }
-    cout << "<< endl;" <<endl;
+    cout <<setw(4*indentation)<< "<< endl;" ;
 }
 
 
@@ -317,7 +320,7 @@ int NoeudInstLire::executer() {
 }
 
 
-void NoeudInstLire::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+void NoeudInstLire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     unsigned int i=0;
     cout << "cin >> " ;
     m_noeud->traduitEnCPP(cout, 0); // cin >> variable

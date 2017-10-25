@@ -12,8 +12,8 @@ Symbole(s.getChaine()) {
   }
 }
 
-void SymboleValue::traduitEnCPP(ostream& cout, unsigned int indentation) {
-        cout << this->getChaine() << endl;
+void SymboleValue::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+        cout << setw(4*indentation) <<""<< this->getChaine();
     
 }
 

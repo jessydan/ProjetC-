@@ -28,7 +28,7 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir>/home/fabien/NetBeansProjects/ProjetC-/.</rundir>
+        <rundir>/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/.</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
