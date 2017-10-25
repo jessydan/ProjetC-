@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     // On exécute le programme si l'arbre n'est pas vide
     if (interpreteur.getArbre()!=nullptr){
         interpreteur.getArbre()->executer();
-        interpreteur.traduitEnCPP(cout,0);
+       // interpreteur.traduitEnCPP(cout,0);
     }
     // Et on vérifie qu'il a fonctionné en regardant comment il a modifié la table des symboles
     cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable();

@@ -214,6 +214,54 @@ void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) con
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// NoeudInstSelon
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstSelon::NoeudInstSelon(Noeud* variable, Noeud* entier, Noeud* sequence, std::vector<Noeud*> casSupp, std::vector<Noeud*> defaut) 
+: m_variable(variable), m_entier(entier), m_sequence(sequence), m_casSupp(casSupp), m_defaut(defaut){
+}
+//casSupp contient : entier | sequence | entier | sequence | ... | sequence
+
+int NoeudInstSelon::executer() {
+    
+    bool controleSequence = true;
+    int valeur = ((SymboleValue*)m_variable)->getValeur(); // on créer une variable int et on y ajoute la valeur de la variable mise en paramètre
+    
+    if(valeur == m_entier->executer()){
+        m_sequence->executer();
+        controleSequence =false;
+    }
+    
+    if(!m_casSupp.empty()){
+        int i=0; // dans la boucle, i ne sera que sur les entiers, ce qui explique son incrémentation par deux
+        while(i<m_casSupp.size() || controleSequence == true){ // tant qu'il y a des cas et que la séquence d'un cas n'a pas déjà été réalisée
+        // m_casSupp.at(i)   = entier
+        // m_casSupp.at(i+1) = séquence
+            if(valeur == m_casSupp.at(i)->executer()){ // si la valeur est égale à l'entier du cas
+               m_casSupp.at(i+1)->executer(); // on exécute la séquence
+                controleSequence =false; // on sort de la boucle car on a exécuter une séquence
+            }
+
+            i+=2; // on passe au prochain entier
+        } 
+        cout << "test" << endl;
+    }
+    
+    if(!m_defaut.empty() && controleSequence){ // si il a un defaut et qu'aucune sequence n'a été faite
+        cout << "passe dedans" << endl;
+        //m_defaut.at(0)->executer(); // on execute la séquence
+    }
+    
+}
+
+void NoeudInstSelon::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
 // NoeudInstPour
 ////////////////////////////////////////////////////////////////////////////////
 

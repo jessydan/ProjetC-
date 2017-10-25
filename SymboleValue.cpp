@@ -12,6 +12,11 @@ Symbole(s.getChaine()) {
   }
 }
 
+int SymboleValue::getValeur() const {
+    return m_valeur;
+}
+
+
 void SymboleValue::traduitEnCPP(ostream& cout, unsigned int indentation) const {
         cout << setw(4*indentation) <<""<< this->getChaine();
     

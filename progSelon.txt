@@ -2,14 +2,18 @@
 # Les lignes de commentaires commencent par #
 procedure principale()
 
-i=10;
+i=8;
 selon(i)
     cas 1 : 
         ecrire("test num 1");
     cas 2 :
         ecrire("test num 2");
+    cas 5 : 
+        ecrire("test num 5");
+    cas 10 :
+        ecrire("test num 10");
     defaut :
-        ecrire("defaut");
+        ecrire("test defaut");
 finselon
 
 

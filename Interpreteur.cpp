@@ -249,19 +249,24 @@ Noeud* Interpreteur::instSelon() {
     Noeud* variable = m_table.chercheAjoute(m_lecteur.getSymbole());//on ajoute la variable à la table de symbole values
     m_lecteur.avancer();
     testerEtAvancer(")");
-    testerEtAvancer("cas ");
+    testerEtAvancer("cas");
     Noeud* entier = m_table.chercheAjoute(m_lecteur.getSymbole());// on ajoute l'entier à la table des symboles
+    m_lecteur.avancer();
     testerEtAvancer(":");
     Noeud* sequence = seqInst();
     
     vector<Noeud*> casSupp;
     vector<Noeud*> defaut;
+    Noeud* entier2;
+    Noeud* sequence2;
     
     while(m_lecteur.getSymbole()== "cas"){ // tant qu'il y a des cas
-        Noeud* entier2 = m_table.chercheAjoute(m_lecteur.getSymbole());
+        testerEtAvancer("cas");
+        entier2 = m_table.chercheAjoute(m_lecteur.getSymbole());
+        m_lecteur.avancer();
         casSupp.push_back(entier2);
         testerEtAvancer(":");
-        Noeud* sequence2 = seqInst(); // on créer la séquence
+        sequence2 = seqInst(); // on créer la séquence
         casSupp.push_back(sequence2);
     }
     
@@ -269,12 +274,11 @@ Noeud* Interpreteur::instSelon() {
         testerEtAvancer("defaut");
         testerEtAvancer(":");
         Noeud* sequenceDefaut = seqInst();
-        defaut.push_back(sequenceDefaut); // on ajoute la séquence au vectore du sinon
+        defaut.push_back(sequenceDefaut); // on ajoute la séquence au vecteur du sinon
     }
     
     testerEtAvancer("finselon");
-    return nullptr;
-    //return new NoeudInstSelon(Noeud* variable, Noeud* entier, Noeud* sequence, vector<Noeud*> casSupp, vector<Noeud*> defaut);
+    return new NoeudInstSelon(variable,entier,sequence,casSupp,defaut);
     
 }
 
