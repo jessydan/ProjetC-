@@ -1,0 +1,17 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+
+i=10;
+selon(i)
+    cas 1 : 
+        ecrire("test num 1");
+    cas 2 :
+        ecrire("test num 2");
+    defaut :
+        ecrire("defaut");
+finselon
+
+
+finproc
+# Commentaire Final

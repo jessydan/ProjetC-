@@ -39,7 +39,8 @@ int main(int argc, char* argv[]) {
   ////////////////////////  PARTIE TESTS CODES TRADUITS ////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////
   
-  // TEST SI RICHE // test le code généré et le compile
+  /////////////////////////////////////////////////////// TEST SI RICHE ///////////////////////////////////////////////////////////// 
+  //test le code généré et le compile
   /*
     int main() {
         int i;
@@ -58,10 +59,10 @@ int main(int argc, char* argv[]) {
     }
   
   */ 
-  // TEST TANT QUE //
-  
+  /////////////////////////////////////////////////////// TEST TANT QUE /////////////////////////////////////////////////////////////
+  // test le code généré et le compile
     /*
-     * 
+     
     int main() {
         int i;
         i = 0;
@@ -75,7 +76,7 @@ int main(int argc, char* argv[]) {
     
     */
   
-  // TEST REPETER //
+  /////////////////////////////////////////////////////// TEST REPETER /////////////////////////////////////////////////////////////
   
   /*
     int main() {
@@ -91,12 +92,13 @@ int main(int argc, char* argv[]) {
 
    */
   
-  // TEST POUR //
+  /////////////////////////////////////////////////////// TEST POUR /////////////////////////////////////////////////////////////////
   
   /*
     int main() {
         int j;
-        while (j = 0;j < 5) {
+        j = 0;
+        while (j < 5) {
             cout << "test" << endl;
             j = j + 1;
         }
@@ -104,15 +106,48 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
+  */
+  /////////////////////////////////////////////////////// TEST LIRE /////////////////////////////////////////////////////////////
+  
+  /*
+    int main() {
+        int i;
+        int j;
+        int k;
+        i = 0;
+        j = 0;
+        k = 0;
+        cout << "Veuillez rentrez la valeur de i :" << endl;
+        cin >> i;
+
+        cout << "Veuillez rentrez les valeurs de j et de k :" << endl;
+        cin >> j >> k;
+
+
+        return 0;
+    }
+
    */
   
-  // TEST LIRE //
+  /////////////////////////////////////////////////////// TEST ECRIRE /////////////////////////////////////////////////////////////
   
-  
-  
-  // TEST ECRIRE //
-  
-  
+  /*
+    int main() {
+        int i;
+        int j;
+        int k;
+        i = 10;
+        j = 3;
+        k = 4;
+        cout << k << endl;
+        cout << "seconde test" << "secondParam test" << "troisiemePAram test" << k << endl;
+        cout << "troisieme test" << i + 1 << endl;
+        cout << "quatrième test" << i + j << k << endl;
+
+        return 0;
+    }
+
+   */
   
   
   

@@ -75,7 +75,7 @@ Noeud* Interpreteur::seqInst() {
     sequence->ajoute(inst());
   } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" 
           || m_lecteur.getSymbole()=="repeter" || m_lecteur.getSymbole()=="pour" || m_lecteur.getSymbole()== "ecrire"
-          || m_lecteur.getSymbole()=="lire");
+          || m_lecteur.getSymbole()=="lire" || m_lecteur.getSymbole()=="selon");
  
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -102,13 +102,16 @@ Noeud* Interpreteur::inst() {
             return instEcrire();
         }else if (m_lecteur.getSymbole() == "lire"){
             return instLire();
+        }else if(m_lecteur.getSymbole() == "selon"){
+            return instSelon();
         }else{
             erreur("Instruction incorrecte");
         }
     }catch(SyntaxeException const& e){ // on récupère l'exception qui a été levée
         cout << e.what() << endl;
         while((m_lecteur.getSymbole()!="si"&& m_lecteur.getSymbole()!="tantque" && m_lecteur.getSymbole()!="pour" &&
-               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire" && m_lecteur.getSymbole()!="finproc" ) && m_lecteur.getSymbole()!="<FINDEFICHIER>")
+               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire" && m_lecteur.getSymbole()!="finproc" &&
+                m_lecteur.getSymbole()!="selon") && m_lecteur.getSymbole()!="<FINDEFICHIER>")
         {
            m_lecteur.avancer();
         }
@@ -237,6 +240,44 @@ Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez
     testerEtAvancer("finsi");
     return new NoeudInstSiRiche(noeuds);
 }
+
+Noeud* Interpreteur::instSelon() {
+    // <instSelon>   ::= selon( <variable>) cas <entier> : <seqInst>  {cas <entier>: <seqInst> } [defaut : <seqInst>] finselon
+    
+    testerEtAvancer("selon");
+    testerEtAvancer("(");
+    Noeud* variable = m_table.chercheAjoute(m_lecteur.getSymbole());//on ajoute la variable à la table de symbole values
+    m_lecteur.avancer();
+    testerEtAvancer(")");
+    testerEtAvancer("cas ");
+    Noeud* entier = m_table.chercheAjoute(m_lecteur.getSymbole());// on ajoute l'entier à la table des symboles
+    testerEtAvancer(":");
+    Noeud* sequence = seqInst();
+    
+    vector<Noeud*> casSupp;
+    vector<Noeud*> defaut;
+    
+    while(m_lecteur.getSymbole()== "cas"){ // tant qu'il y a des cas
+        Noeud* entier2 = m_table.chercheAjoute(m_lecteur.getSymbole());
+        casSupp.push_back(entier2);
+        testerEtAvancer(":");
+        Noeud* sequence2 = seqInst(); // on créer la séquence
+        casSupp.push_back(sequence2);
+    }
+    
+    if (m_lecteur.getSymbole()=="defaut"){ // si le cas par défaut à été renseigné
+        testerEtAvancer("defaut");
+        testerEtAvancer(":");
+        Noeud* sequenceDefaut = seqInst();
+        defaut.push_back(sequenceDefaut); // on ajoute la séquence au vectore du sinon
+    }
+    
+    testerEtAvancer("finselon");
+    return nullptr;
+    //return new NoeudInstSelon(Noeud* variable, Noeud* entier, Noeud* sequence, vector<Noeud*> casSupp, vector<Noeud*> defaut);
+    
+}
+
 
 Noeud* Interpreteur::instPour() { // pour à corriger
     // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
