@@ -93,7 +93,18 @@ int main(int argc, char* argv[]) {
   
   // TEST POUR //
   
-  
+  /*
+    int main() {
+        int j;
+        while (j = 0;j < 5) {
+            cout << "test" << endl;
+            j = j + 1;
+        }
+
+        return 0;
+    }
+
+   */
   
   // TEST LIRE //
   

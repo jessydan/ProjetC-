@@ -234,16 +234,15 @@ int NoeudInstPour::executer() {
 }
 
 void NoeudInstPour::traduitEnCPP(ostream & cout,unsigned int indentation) const {
-    cout << setw(4*indentation) << "while ("<< endl;
+    cout << setw(4*indentation) <<""<< "while (";
     if(m_affectationDebut != nullptr){
         m_affectationDebut->traduitEnCPP(cout, 0); // on met l'affectation dans les parametres du while
-        cout << ";";
     }
     
     m_condition->traduitEnCPP(cout, 0); // on met la condition d'arrêt du while dans ses paramètres
     cout << ") {" << endl;
     m_sequence->traduitEnCPP(cout, indentation+1); // on met la séquence 
-    cout << setw(4*indentation)<<""<< "}" << endl;
+    cout << setw(4*indentation)<<""<< "}";
     
  
 }
