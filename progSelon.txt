@@ -13,7 +13,7 @@ selon(i)
     cas 10 :
         ecrire("test num 10");
     defaut :
-        ecrire("test defaut");
+        ecrire("test de defaut");
 finselon
 
 

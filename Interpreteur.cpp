@@ -40,9 +40,9 @@ void Interpreteur::erreur(const string & message) const throw (SyntaxeException)
 }
 
 void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
-    cout << "\n\n===================TRADUCTION EN C++================\n"<<endl;
+    cout << "\n\n// ===================TRADUCTION EN C++================\n"<<endl;
     cout << setw(4*indentation)<<""<<"#include <iostream>"<<endl;
-    cout << setw(4*indentation)<<""<<"using namespace std"<<endl;
+    cout << setw(4*indentation)<<""<<"using namespace std;"<<endl;
     cout << setw(4*indentation)<<""<<"\nint main() {"<< endl;
   
   for (int i = 0 ; i < m_table.getTaille() ; i++){ // pour écrire int i; int j; etc...

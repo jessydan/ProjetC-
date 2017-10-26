@@ -5,7 +5,10 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(testSiRiche);
 
 void testSiRiche::testSiRiche() {
-// déclaration des données nécessaires au test
+    ifstream fichier("testSi.txt");
+    Interpreteur interpreteur(fichier);
+    CPPUNIT_ASSERT_NO_THROW_MESSAGE("Test analyse si", interpreteur.analyse());
+    
 }
 
 

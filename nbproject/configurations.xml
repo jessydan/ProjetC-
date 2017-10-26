@@ -16,14 +16,20 @@
                    displayName="Resource Files"
                    projectFiles="true">
       <itemPath>motsCles.txt</itemPath>
+      <itemPath>progEcrire.cpp</itemPath>
       <itemPath>progEcrire.txt</itemPath>
+      <itemPath>progLire.cpp</itemPath>
       <itemPath>progLire.txt</itemPath>
+      <itemPath>progPour.cpp</itemPath>
       <itemPath>progPour.txt</itemPath>
+      <itemPath>progRepeter.cpp</itemPath>
       <itemPath>progRepeter.txt</itemPath>
+      <itemPath>progSelon.cpp</itemPath>
       <itemPath>progSelon.txt</itemPath>
+      <itemPath>progSi.cpp</itemPath>
       <itemPath>progSi.txt</itemPath>
+      <itemPath>progTantQue.cpp</itemPath>
       <itemPath>progTantQue.txt</itemPath>
-      <itemPath>programme.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -110,21 +116,33 @@
       </item>
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progEcrire.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="progEcrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progLire.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progLire.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progPour.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="progPour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progRepeter.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progSelon.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="progSelon.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progSi.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progSi.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="progTantQue.txt" ex="false" tool="3" flavor2="0">
+      <item path="progTantQue.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="programme.txt" ex="false" tool="3" flavor2="0">
+      <item path="progTantQue.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/testSiRiche.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -197,21 +215,33 @@
       </item>
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progEcrire.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="progEcrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progLire.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progLire.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progPour.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="progPour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progRepeter.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progRepeter.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progSelon.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="progSelon.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progSi.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progSi.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="progTantQue.txt" ex="false" tool="3" flavor2="0">
+      <item path="progTantQue.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="programme.txt" ex="false" tool="3" flavor2="0">
+      <item path="progTantQue.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/testSiRiche.cpp" ex="false" tool="1" flavor2="0">
       </item>

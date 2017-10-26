@@ -234,35 +234,53 @@ int NoeudInstSelon::executer() {
     
     if(!m_casSupp.empty()){
         int i=0; // dans la boucle, i ne sera que sur les entiers, ce qui explique son incrémentation par deux
-        while(i<m_casSupp.size() || controleSequence == true){ // tant qu'il y a des cas et que la séquence d'un cas n'a pas déjà été réalisée
+        while(i<m_casSupp.size() && controleSequence == true){ // tant qu'il y a des cas et que la séquence d'un cas n'a pas déjà été réalisée
         // m_casSupp.at(i)   = entier
         // m_casSupp.at(i+1) = séquence
             if(valeur == m_casSupp.at(i)->executer()){ // si la valeur est égale à l'entier du cas
                m_casSupp.at(i+1)->executer(); // on exécute la séquence
                 controleSequence =false; // on sort de la boucle car on a exécuter une séquence
             }
-
             i+=2; // on passe au prochain entier
         } 
-        cout << "test" << endl;
     }
     
     if(!m_defaut.empty() && controleSequence){ // si il a un defaut et qu'aucune sequence n'a été faite
-        cout << "passe dedans" << endl;
-        //m_defaut.at(0)->executer(); // on execute la séquence
+        m_defaut.at(0)->executer(); // on execute la séquence
     }
-    
 }
 
 void NoeudInstSelon::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation) <<""<<"switch(";
+    m_variable->traduitEnCPP(cout, 0);
+    cout << ") {" << endl;
     
+    cout << setw(4*(indentation+1)) <<"" << "case ";
+    m_entier->traduitEnCPP(cout, 0);
+    cout << " : " << endl;
+    m_sequence->traduitEnCPP(cout, indentation+2);
+    cout << "\n"  << setw(4*(indentation+1)) <<"" << "break;";
+    
+    int i=0;
+    while(i<m_casSupp.size()){
+        cout << "\n" << setw(4*(indentation+1)) <<"" << "case ";
+        m_casSupp.at(i)->traduitEnCPP(cout, 0);
+        cout << " : " << endl;
+        m_casSupp.at(i+1)->traduitEnCPP(cout, indentation+2);
+        cout << "\n"  << setw(4*(indentation+1)) <<"" << "break;";
+        i+=2;
+    }
+    
+    if(m_defaut.size()>0){
+        cout << "\n" << setw(4*(indentation+1))<<"" << "default : "<< endl;
+        m_defaut.at(0)->traduitEnCPP(cout, indentation+2);
+    }
+    
+    cout << setw(4*indentation) <<"" << "}";
 }
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
-// NoeudInstPour
+// NoeudInstPour                                    
 ////////////////////////////////////////////////////////////////////////////////
 
 NoeudInstPour::NoeudInstPour(Noeud* affectationDebut, Noeud* conditionArret, Noeud* affectationFin, Noeud* sequence)
