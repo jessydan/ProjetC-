@@ -211,6 +211,7 @@ Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez
 // le vecteur contiendra condition|séquence|condition|...|séquence
     
     vector<Noeud*> noeuds;
+    vector<Noeud*> noeudSinon;
     
     testerEtAvancer("si");
     testerEtAvancer("(");
@@ -230,15 +231,15 @@ Noeud* Interpreteur::instSiRiche() { // revoir le vecteur il ne prends pas assez
         noeuds.push_back(sequenceSinonSi); // on stocke la sequence dans le vecteur de noeuds
     }
     // pas forcément un sinon.
-    if (m_lecteur.getSymbole()=="sinon"){
+    if (m_lecteur.getSymbole()=="sinon"){ // on utilise un vecteur car celui ci peut être nul et pourra donc le manipuler plus simplement
         testerEtAvancer("sinon"); // le sinon n'a pas de condition, on se servira de cette différence pour le repérer dans le vecteur
         Noeud* sequenceSinon = seqInst(); 
-        noeuds.push_back(sequenceSinon);
+        noeudSinon.push_back(sequenceSinon);
     }
     
     
     testerEtAvancer("finsi");
-    return new NoeudInstSiRiche(noeuds);
+    return new NoeudInstSiRiche(noeuds, noeudSinon);
 }
 
 Noeud* Interpreteur::instSelon() {

@@ -7,23 +7,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/Symbole.cpp</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/main.cpp</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/Lecteur.h</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/ArbreAbstrait.h</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/progRepeter.txt</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/tests/testSiRiche.h</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/programme.txt</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/Symbole.h</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/progSelon.txt</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/TableSymboles.cpp</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/Lecteur.cpp</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/motsCles.txt</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/Interpreteur.h</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/ArbreAbstrait.cpp</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/progSi.txt</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/Interpreteur.cpp</file>
-            <file>file:/users/info/etu-s3/behraf/NetBeansProjects/ProjetC++/tests/testSiRiche.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/ArbreAbstrait.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progLire.txt</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Interpreteur.h</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/ArbreAbstrait.h</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/TableSymboles.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Symbole.h</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Exceptions.h</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Interpreteur.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Lecteur.h</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/main.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progTantQue.txt</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Symbole.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progRepeter.txt</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/Lecteur.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progEcrire.txt</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/motsCles.txt</file>
         </group>
     </open-files>
 </project-private>

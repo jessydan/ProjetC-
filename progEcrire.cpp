@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int mainEcrire() {
     int i;
     int j;
     int k;

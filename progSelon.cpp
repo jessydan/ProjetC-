@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int Selon() {
     int i;
     i = 8;
     switch(i) {

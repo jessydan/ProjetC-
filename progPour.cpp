@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int mainPour() {
     int j;
     j = 0;
     while (j < 5) {

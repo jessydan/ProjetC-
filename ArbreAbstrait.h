@@ -122,16 +122,15 @@ class NoeudInstSiRiche : public Noeud {
 //  et ses multiples fils : au min une conditionSi , une instructionSi et un instructionSinon
 //                          ou alors on rajoute des conditionSinonSi et des instructionSinonSi
   public:
-    NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds);
+    NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds, std::vector<Noeud*> noeudSinon);
      // Construit une instruction SiRiche avec le vector de noeud mis en paramètre.
    ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction SiRiche : Si la condition est vrai alors, sinonsi la condition est vraie alors ... sinon on excute la séquence
     void traduitEnCPP(ostream & cout,unsigned int indentation) const;
 
   private:
-    Noeud*  m_condition;
-    Noeud*  m_sequence;
     std::vector<Noeud*> m_vectNoeuds;
+    std::vector<Noeud*> m_vectSinon;
 
 };
 

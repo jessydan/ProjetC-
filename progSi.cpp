@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int mainSi() {
     int i;
     i = 0;
     if (i == 3) {
@@ -16,3 +16,5 @@ int main() {
 
     return 0;
 }
+
+

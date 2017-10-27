@@ -163,8 +163,8 @@ void NoeudInstRepeter::traduitEnCPP(ostream & cout,unsigned int indentation) con
 // NoeudInstSiRiche
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstSiRiche::NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds)
-: m_vectNoeuds(vectNoeuds) {
+NoeudInstSiRiche::NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds, std::vector<Noeud*> noeudSinon)
+: m_vectNoeuds(vectNoeuds), m_vectSinon(noeudSinon) {
 }
 
 int NoeudInstSiRiche::executer() {
@@ -173,19 +173,19 @@ int NoeudInstSiRiche::executer() {
     //m_vectNoeuds.at(0) == condition si
     //m_vectNoeuds.at(1) == séquence si
     Noeud* p;
-    bool exit = false;
-
-    for (int i = 0; i < m_vectNoeuds.size() && exit == false; i += 2) { //on parcours le vecteur
-        if (i < (m_vectNoeuds.size() - 2)) { // si on n'est pas au dernier élément (soit la séquence du sinon)
-            if (m_vectNoeuds.at(i)->executer()) { // si la condition est bonne
-                m_vectNoeuds.at(i + 1)->executer(); // on execute la séquence
-                exit = true; // si un si || sinonSi est exécuté on sort de la boucle
-            }
+    bool exit =false;
+    
+    for(int i = 0 ; i<m_vectNoeuds.size()-1 && !exit ;i+=2){ // on parcours le vecteur avec une incrémentation de 2 afin de mettre i que sur les conditions
+        if(m_vectNoeuds.at(i)->executer()){ // si la condition est vraie
+            m_vectNoeuds.at(i+1)->executer();// alors on execute la séquence
+            exit = true; // on sort de la boucle car une séquence à été exécuter
         }
     }
-    if (!exit) { // si on est à la condition du sinon
-        m_vectNoeuds[m_vectNoeuds.size() - 1]->executer(); //on execute la sequence de sinon
+    
+    if (m_vectSinon.size()>0 && !exit){ // si il y a un sinon et qu'aucune séquence n'a été exécutée
+        m_vectSinon.at(0)->executer(); // on exécute la séquence du sinon
     }
+    
     return 0;
 }
 
@@ -197,7 +197,7 @@ void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) con
     m_vectNoeuds.at(1)->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée 
     cout << setw(4*indentation)<< "" << "}";// Ecrit "}" avec l'indentation initiale et passe à la ligne 
     
-    while(i<m_vectNoeuds.size()-2){ // on parcours le vecteur
+    while(i<m_vectNoeuds.size()-1){ // on parcours le vecteur
          // si on n'est pas sur le dernier élément
         cout <<"else if ("; // il écrite à la suiàte de la précédente accolade
         m_vectNoeuds.at(i)->traduitEnCPP(cout,0);
@@ -208,9 +208,12 @@ void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) con
         
     }
     
-    cout<<"else {"<<endl;
-    m_vectNoeuds.at(i)->traduitEnCPP(cout,indentation+1);
-    cout <<setw(4*indentation) <<""<< "}" ;
+    if(m_vectSinon.size()>0){
+        cout<<"else {"<<endl;
+        m_vectSinon.at(0)->traduitEnCPP(cout,indentation+1);
+        cout <<setw(4*indentation) <<""<< "}" ;
+    }
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
