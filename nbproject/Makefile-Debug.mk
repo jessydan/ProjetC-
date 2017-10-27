@@ -59,8 +59,8 @@ TESTFILES= \
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/testSiRiche.o \
-	${TESTDIR}/tests/testSiRicheRunner.o
+	${TESTDIR}/tests/testNoeud.o \
+	${TESTDIR}/tests/testNoeudRunner.o
 
 # C Compiler Flags
 CFLAGS=
@@ -163,21 +163,21 @@ ${OBJECTDIR}/progTantQue.o: progTantQue.cpp
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/testSiRiche.o ${TESTDIR}/tests/testSiRicheRunner.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/testNoeud.o ${TESTDIR}/tests/testNoeudRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   `cppunit-config --libs`   
 
 
-${TESTDIR}/tests/testSiRiche.o: tests/testSiRiche.cpp 
+${TESTDIR}/tests/testNoeud.o: tests/testNoeud.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testSiRiche.o tests/testSiRiche.cpp
+	$(COMPILE.cc) -g `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testNoeud.o tests/testNoeud.cpp
 
 
-${TESTDIR}/tests/testSiRicheRunner.o: tests/testSiRicheRunner.cpp 
+${TESTDIR}/tests/testNoeudRunner.o: tests/testNoeudRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testSiRicheRunner.o tests/testSiRicheRunner.cpp
+	$(COMPILE.cc) -g `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testNoeudRunner.o tests/testNoeudRunner.cpp
 
 
 ${OBJECTDIR}/ArbreAbstrait_nomain.o: ${OBJECTDIR}/ArbreAbstrait.o ArbreAbstrait.cpp 
