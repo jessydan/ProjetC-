@@ -1,0 +1,19 @@
+procedure principale()
+
+i=0;
+si(i==3 # doit détecter cette erreur
+i=4;
+sinonsi(i==4 # ne detectera pas celle ci
+i=5;
+sinon
+i=10;
+finsi
+
+ecrire(i);
+
+pour(j=0; j<5; j=j+1 # dectera cette erreur
+ecrire("test");
+finpour
+
+finproc
+

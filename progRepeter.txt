@@ -1,5 +1,6 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
+# doit renvoyer : testRepeter testRepeter testRepeter testRepeter
 procedure principale()
 
 i=0;

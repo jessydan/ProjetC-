@@ -18,6 +18,7 @@
       <itemPath>motsCles.txt</itemPath>
       <itemPath>progEcrire.cpp</itemPath>
       <itemPath>progEcrire.txt</itemPath>
+      <itemPath>progErreurs.txt</itemPath>
       <itemPath>progLire.cpp</itemPath>
       <itemPath>progLire.txt</itemPath>
       <itemPath>progPour.cpp</itemPath>
@@ -120,6 +121,8 @@
       </item>
       <item path="progEcrire.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="progErreurs.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="progLire.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progLire.txt" ex="false" tool="3" flavor2="0">
@@ -218,6 +221,8 @@
       <item path="progEcrire.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="progEcrire.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="progErreurs.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="progLire.cpp" ex="false" tool="1" flavor2="0">
       </item>

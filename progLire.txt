@@ -1,5 +1,9 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
+# doit renvoyer : Veuillez rentrez la valeur de i :
+#               : Veuillez rentrez les valeurs de j et de k :
+# et initialiser i, j et k aux bonnes valeurs
+
 procedure principale()
 i=0;
 j=0;

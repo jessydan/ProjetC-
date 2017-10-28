@@ -1,5 +1,7 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
+# doit renvoyer : test de defaut
+
 procedure principale()
 
 i=8;

@@ -1,13 +1,18 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
+#doit renvoyer : 4 
+#                seconde test secondParam test troisiemePAram test 4
+#                troisième test 11
+#                quatrieme test 134
+
 procedure principale()
 i=10;
 j=3;
 k=4;
 ecrire(k);
-ecrire("seconde test","secondParam test","troisiemePAram test",k);
-ecrire("troisieme test", i+1);
-ecrire("quatrième test", i+j,k); 
+ecrire(" seconde test"," secondParam test"," troisiemePAram test ",k);
+ecrire("troisieme test ", i+1);
+ecrire("quatrième test ", i+j,k); 
 
 finproc
 # Commentaire Final

@@ -110,10 +110,9 @@ Noeud* Interpreteur::inst() {
     }catch(SyntaxeException const& e){ // on récupère l'exception qui a été levée
         cout << e.what() << endl;
         while((m_lecteur.getSymbole()!="si"&& m_lecteur.getSymbole()!="tantque" && m_lecteur.getSymbole()!="pour" &&
-               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire" && m_lecteur.getSymbole()!="finproc" &&
-                m_lecteur.getSymbole()!="selon") && m_lecteur.getSymbole()!="<FINDEFICHIER>")
-        {
-           m_lecteur.avancer();
+               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire"&& m_lecteur.getSymbole()!="finproc" &&
+               m_lecteur.getSymbole()!="selon") && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
+            m_lecteur.avancer();
         }
     }
 }

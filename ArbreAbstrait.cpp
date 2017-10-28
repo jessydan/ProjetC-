@@ -190,7 +190,7 @@ int NoeudInstSiRiche::executer() {
 }
 
 void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) const {
-    unsigned int i =0;
+    unsigned int i =2;
     cout << setw(4*indentation)<<""<<"if (";// Ecrit "if (" avec un décalage de 4*indentation espaces 
     m_vectNoeuds.at(0)->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage 
     cout << ") {"<< endl;// Ecrit ") {" et passe à la ligne  
