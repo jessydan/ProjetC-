@@ -110,9 +110,10 @@ Noeud* Interpreteur::inst() {
     }catch(SyntaxeException const& e){ // on récupère l'exception qui a été levée
         cout << e.what() << endl;
         while((m_lecteur.getSymbole()!="si"&& m_lecteur.getSymbole()!="tantque" && m_lecteur.getSymbole()!="pour" &&
-               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire"&& m_lecteur.getSymbole()!="finproc" &&
+               m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire"&& 
                m_lecteur.getSymbole()!="selon") && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
-            m_lecteur.avancer();
+            m_lecteur.avancer(); // on fait avancer le lecteur tant qu'il ne lit pas un des symbole du while
+            cout << "\nsymbole lu par le lecteur : " << m_lecteur.getSymbole().getChaine();
         }
     }
 }
@@ -168,17 +169,6 @@ Noeud* Interpreteur::facteur() {
   } else
     erreur("Facteur incorrect");
   return fact;
-}
-
-Noeud* Interpreteur::instSi() {
-  // <instSi> ::= si ( <expression> ) <seqInst> finsi
-  testerEtAvancer("si");
-  testerEtAvancer("(");
-  Noeud* condition = expression(); // On mémorise la condition
-  testerEtAvancer(")");
-  Noeud* sequence = seqInst();     // On mémorise la séquence d'instruction
-  testerEtAvancer("finsi");
-  return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
 }
 
 

@@ -95,23 +95,6 @@ void NoeudOperateurBinaire::traduitEnCPP(ostream & cout,unsigned int indentation
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// NoeudInstSi
-////////////////////////////////////////////////////////////////////////////////
-
-NoeudInstSi::NoeudInstSi(Noeud* condition, Noeud* sequence)
-: m_condition(condition), m_sequence(sequence) {
-}
-
-int NoeudInstSi::executer() {
-    if (m_condition->executer()) m_sequence->executer();
-    return 0; // La valeur renvoyée ne représente rien !
-}
-
-void NoeudInstSi::traduitEnCPP(ostream & cout,unsigned int indentation) const {
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -145,8 +128,8 @@ NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence, Noeud* condition)
 
 int NoeudInstRepeter::executer() {
     do {
-        m_sequence->executer();
-    } while (m_condition->executer());
+        m_sequence->executer(); // on execute la séquence
+    } while (m_condition->executer()); // tant que la condition est bonne
     return 0;
 }
 
@@ -255,17 +238,17 @@ int NoeudInstSelon::executer() {
 
 void NoeudInstSelon::traduitEnCPP(ostream& cout, unsigned int indentation) const {
     cout << setw(4*indentation) <<""<<"switch(";
-    m_variable->traduitEnCPP(cout, 0);
+    m_variable->traduitEnCPP(cout, 0); // ecriture de la variable à contrôler
     cout << ") {" << endl;
     
     cout << setw(4*(indentation+1)) <<"" << "case ";
-    m_entier->traduitEnCPP(cout, 0);
+    m_entier->traduitEnCPP(cout, 0); // ecriture du chiffre du case qui correspond à un des cas
     cout << " : " << endl;
     m_sequence->traduitEnCPP(cout, indentation+2);
     cout << "\n"  << setw(4*(indentation+1)) <<"" << "break;";
     
     int i=0;
-    while(i<m_casSupp.size()){
+    while(i<m_casSupp.size()){ // tant qu'il y a des cas (à partir du cas n°2)
         cout << "\n" << setw(4*(indentation+1)) <<"" << "case ";
         m_casSupp.at(i)->traduitEnCPP(cout, 0);
         cout << " : " << endl;
@@ -274,7 +257,7 @@ void NoeudInstSelon::traduitEnCPP(ostream& cout, unsigned int indentation) const
         i+=2;
     }
     
-    if(m_defaut.size()>0){
+    if(m_defaut.size()>0){ // si il y a un default (qui correspond à un else)
         cout << "\n" << setw(4*(indentation+1))<<"" << "default : "<< endl;
         m_defaut.at(0)->traduitEnCPP(cout, indentation+2);
     }
@@ -402,7 +385,3 @@ void NoeudInstLire::traduitEnCPP(ostream & cout,unsigned int indentation) const 
     }
     cout << ";" << endl;
 }
-
-
-
-
