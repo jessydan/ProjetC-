@@ -59,8 +59,8 @@ TESTFILES= \
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/testNoeud.o \
-	${TESTDIR}/tests/testNoeudRunner.o
+	${TESTDIR}/tests/NoeudTest.o \
+	${TESTDIR}/tests/NoeudTestRunner.o
 
 # C Compiler Flags
 CFLAGS=
@@ -89,72 +89,72 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/projetc-: ${OBJECTFILES}
 ${OBJECTDIR}/ArbreAbstrait.o: ArbreAbstrait.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArbreAbstrait.o ArbreAbstrait.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArbreAbstrait.o ArbreAbstrait.cpp
 
 ${OBJECTDIR}/Interpreteur.o: Interpreteur.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Interpreteur.o Interpreteur.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Interpreteur.o Interpreteur.cpp
 
 ${OBJECTDIR}/Lecteur.o: Lecteur.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Lecteur.o Lecteur.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Lecteur.o Lecteur.cpp
 
 ${OBJECTDIR}/Symbole.o: Symbole.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Symbole.o Symbole.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Symbole.o Symbole.cpp
 
 ${OBJECTDIR}/SymboleValue.o: SymboleValue.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SymboleValue.o SymboleValue.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SymboleValue.o SymboleValue.cpp
 
 ${OBJECTDIR}/TableSymboles.o: TableSymboles.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TableSymboles.o TableSymboles.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TableSymboles.o TableSymboles.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/progEcrire.o: progEcrire.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progEcrire.o progEcrire.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progEcrire.o progEcrire.cpp
 
 ${OBJECTDIR}/progLire.o: progLire.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progLire.o progLire.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progLire.o progLire.cpp
 
 ${OBJECTDIR}/progPour.o: progPour.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progPour.o progPour.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progPour.o progPour.cpp
 
 ${OBJECTDIR}/progRepeter.o: progRepeter.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progRepeter.o progRepeter.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progRepeter.o progRepeter.cpp
 
 ${OBJECTDIR}/progSelon.o: progSelon.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSelon.o progSelon.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSelon.o progSelon.cpp
 
 ${OBJECTDIR}/progSi.o: progSi.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSi.o progSi.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSi.o progSi.cpp
 
 ${OBJECTDIR}/progTantQue.o: progTantQue.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progTantQue.o progTantQue.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progTantQue.o progTantQue.cpp
 
 # Subprojects
 .build-subprojects:
@@ -163,21 +163,21 @@ ${OBJECTDIR}/progTantQue.o: progTantQue.cpp
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/testNoeud.o ${TESTDIR}/tests/testNoeudRunner.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/NoeudTest.o ${TESTDIR}/tests/NoeudTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   `cppunit-config --libs`   
 
 
-${TESTDIR}/tests/testNoeud.o: tests/testNoeud.cpp 
+${TESTDIR}/tests/NoeudTest.o: tests/NoeudTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testNoeud.o tests/testNoeud.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/NoeudTest.o tests/NoeudTest.cpp
 
 
-${TESTDIR}/tests/testNoeudRunner.o: tests/testNoeudRunner.cpp 
+${TESTDIR}/tests/NoeudTestRunner.o: tests/NoeudTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testNoeudRunner.o tests/testNoeudRunner.cpp
+	$(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/NoeudTestRunner.o tests/NoeudTestRunner.cpp
 
 
 ${OBJECTDIR}/ArbreAbstrait_nomain.o: ${OBJECTDIR}/ArbreAbstrait.o ArbreAbstrait.cpp 
@@ -188,7 +188,7 @@ ${OBJECTDIR}/ArbreAbstrait_nomain.o: ${OBJECTDIR}/ArbreAbstrait.o ArbreAbstrait.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArbreAbstrait_nomain.o ArbreAbstrait.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArbreAbstrait_nomain.o ArbreAbstrait.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ArbreAbstrait.o ${OBJECTDIR}/ArbreAbstrait_nomain.o;\
 	fi
@@ -201,7 +201,7 @@ ${OBJECTDIR}/Interpreteur_nomain.o: ${OBJECTDIR}/Interpreteur.o Interpreteur.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Interpreteur_nomain.o Interpreteur.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Interpreteur_nomain.o Interpreteur.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Interpreteur.o ${OBJECTDIR}/Interpreteur_nomain.o;\
 	fi
@@ -214,7 +214,7 @@ ${OBJECTDIR}/Lecteur_nomain.o: ${OBJECTDIR}/Lecteur.o Lecteur.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Lecteur_nomain.o Lecteur.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Lecteur_nomain.o Lecteur.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Lecteur.o ${OBJECTDIR}/Lecteur_nomain.o;\
 	fi
@@ -227,7 +227,7 @@ ${OBJECTDIR}/Symbole_nomain.o: ${OBJECTDIR}/Symbole.o Symbole.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Symbole_nomain.o Symbole.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Symbole_nomain.o Symbole.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Symbole.o ${OBJECTDIR}/Symbole_nomain.o;\
 	fi
@@ -240,7 +240,7 @@ ${OBJECTDIR}/SymboleValue_nomain.o: ${OBJECTDIR}/SymboleValue.o SymboleValue.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SymboleValue_nomain.o SymboleValue.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SymboleValue_nomain.o SymboleValue.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/SymboleValue.o ${OBJECTDIR}/SymboleValue_nomain.o;\
 	fi
@@ -253,7 +253,7 @@ ${OBJECTDIR}/TableSymboles_nomain.o: ${OBJECTDIR}/TableSymboles.o TableSymboles.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TableSymboles_nomain.o TableSymboles.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TableSymboles_nomain.o TableSymboles.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/TableSymboles.o ${OBJECTDIR}/TableSymboles_nomain.o;\
 	fi
@@ -266,7 +266,7 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
 	fi
@@ -279,7 +279,7 @@ ${OBJECTDIR}/progEcrire_nomain.o: ${OBJECTDIR}/progEcrire.o progEcrire.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progEcrire_nomain.o progEcrire.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progEcrire_nomain.o progEcrire.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progEcrire.o ${OBJECTDIR}/progEcrire_nomain.o;\
 	fi
@@ -292,7 +292,7 @@ ${OBJECTDIR}/progLire_nomain.o: ${OBJECTDIR}/progLire.o progLire.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progLire_nomain.o progLire.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progLire_nomain.o progLire.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progLire.o ${OBJECTDIR}/progLire_nomain.o;\
 	fi
@@ -305,7 +305,7 @@ ${OBJECTDIR}/progPour_nomain.o: ${OBJECTDIR}/progPour.o progPour.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progPour_nomain.o progPour.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progPour_nomain.o progPour.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progPour.o ${OBJECTDIR}/progPour_nomain.o;\
 	fi
@@ -318,7 +318,7 @@ ${OBJECTDIR}/progRepeter_nomain.o: ${OBJECTDIR}/progRepeter.o progRepeter.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progRepeter_nomain.o progRepeter.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progRepeter_nomain.o progRepeter.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progRepeter.o ${OBJECTDIR}/progRepeter_nomain.o;\
 	fi
@@ -331,7 +331,7 @@ ${OBJECTDIR}/progSelon_nomain.o: ${OBJECTDIR}/progSelon.o progSelon.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSelon_nomain.o progSelon.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSelon_nomain.o progSelon.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progSelon.o ${OBJECTDIR}/progSelon_nomain.o;\
 	fi
@@ -344,7 +344,7 @@ ${OBJECTDIR}/progSi_nomain.o: ${OBJECTDIR}/progSi.o progSi.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSi_nomain.o progSi.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progSi_nomain.o progSi.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progSi.o ${OBJECTDIR}/progSi_nomain.o;\
 	fi
@@ -357,7 +357,7 @@ ${OBJECTDIR}/progTantQue_nomain.o: ${OBJECTDIR}/progTantQue.o progTantQue.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progTantQue_nomain.o progTantQue.cpp;\
+	    $(COMPILE.cc) -g -I/home/fabien/cppunit-cvs-repo-archive/cppunit -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/progTantQue_nomain.o progTantQue.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/progTantQue.o ${OBJECTDIR}/progTantQue_nomain.o;\
 	fi

@@ -51,9 +51,9 @@
                      displayName="TestNoeud"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>tests/testNoeud.cpp</itemPath>
-        <itemPath>tests/testNoeud.h</itemPath>
-        <itemPath>tests/testNoeudRunner.cpp</itemPath>
+        <itemPath>tests/NoeudTest.cpp</itemPath>
+        <itemPath>tests/NoeudTest.h</itemPath>
+        <itemPath>tests/NoeudTestRunner.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -72,6 +72,11 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>/home/fabien/cppunit-cvs-repo-archive/cppunit</pElem>
+          </incDir>
+        </ccTool>
       </compileType>
       <item path="ArbreAbstrait.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -147,11 +152,11 @@
       </item>
       <item path="progTantQue.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/testNoeud.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/NoeudTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/testNoeud.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/NoeudTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/testNoeudRunner.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/NoeudTestRunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -248,11 +253,11 @@
       </item>
       <item path="progTantQue.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/testNoeud.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/NoeudTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/testNoeud.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/NoeudTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/testNoeudRunner.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/NoeudTestRunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

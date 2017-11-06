@@ -59,8 +59,8 @@ TESTFILES= \
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/testNoeud.o \
-	${TESTDIR}/tests/testNoeudRunner.o
+	${TESTDIR}/tests/NoeudTest.o \
+	${TESTDIR}/tests/NoeudTestRunner.o
 
 # C Compiler Flags
 CFLAGS=
@@ -163,21 +163,21 @@ ${OBJECTDIR}/progTantQue.o: progTantQue.cpp
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/testNoeud.o ${TESTDIR}/tests/testNoeudRunner.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/NoeudTest.o ${TESTDIR}/tests/NoeudTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   `cppunit-config --libs`   
 
 
-${TESTDIR}/tests/testNoeud.o: tests/testNoeud.cpp 
+${TESTDIR}/tests/NoeudTest.o: tests/NoeudTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testNoeud.o tests/testNoeud.cpp
+	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/NoeudTest.o tests/NoeudTest.cpp
 
 
-${TESTDIR}/tests/testNoeudRunner.o: tests/testNoeudRunner.cpp 
+${TESTDIR}/tests/NoeudTestRunner.o: tests/NoeudTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testNoeudRunner.o tests/testNoeudRunner.cpp
+	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/NoeudTestRunner.o tests/NoeudTestRunner.cpp
 
 
 ${OBJECTDIR}/ArbreAbstrait_nomain.o: ${OBJECTDIR}/ArbreAbstrait.o ArbreAbstrait.cpp 

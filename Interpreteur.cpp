@@ -113,7 +113,6 @@ Noeud* Interpreteur::inst() {
                m_lecteur.getSymbole()!="ecrire" && m_lecteur.getSymbole()!="lire"&& 
                m_lecteur.getSymbole()!="selon") && m_lecteur.getSymbole()!="<FINDEFICHIER>"){
             m_lecteur.avancer(); // on fait avancer le lecteur tant qu'il ne lit pas un des symbole du while
-            cout << "\nsymbole lu par le lecteur : " << m_lecteur.getSymbole().getChaine();
         }
     }
 }
