@@ -174,7 +174,7 @@ int NoeudInstSiRiche::executer() {
 
 void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     unsigned int i =2;
-    cout << setw(4*indentation)<<""<<"if (";// Ecrit "if (" avec un décalage de 4*indentation espaces 
+    cout << setw(4*indentation)<<""<<"if (";// Ecrit "if (" avec un décalage de 4*indentation d'espaces 
     m_vectNoeuds.at(0)->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage 
     cout << ") {"<< endl;// Ecrit ") {" et passe à la ligne  
     m_vectNoeuds.at(1)->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée 
@@ -191,7 +191,7 @@ void NoeudInstSiRiche::traduitEnCPP(ostream & cout,unsigned int indentation) con
         
     }
     
-    if(m_vectSinon.size()>0){
+    if(m_vectSinon.size()>0){ // si il y a un sinon
         cout<<"else {"<<endl;
         m_vectSinon.at(0)->traduitEnCPP(cout,indentation+1);
         cout <<setw(4*indentation) <<""<< "}" ;
@@ -211,14 +211,14 @@ NoeudInstSelon::NoeudInstSelon(Noeud* variable, Noeud* entier, Noeud* sequence, 
 int NoeudInstSelon::executer() {
     
     bool controleSequence = true;
-    int valeur = ((SymboleValue*)m_variable)->getValeur(); // on créer une variable int et on y ajoute la valeur de la variable mise en paramètre
+    int valeur = ((SymboleValue*)m_variable)->getValeur(); // on créé une variable int et on y ajoute la valeur de la variable mise en paramètre
     
-    if(valeur == m_entier->executer()){
-        m_sequence->executer();
-        controleSequence =false;
+    if(valeur == m_entier->executer()){ // si la variable est égale a la valeur du cas
+        m_sequence->executer(); // on exécute la séquence
+        controleSequence =false; // on sort de la boucle afin qu'aucun autre cas ne soit exécuter
     }
     
-    if(!m_casSupp.empty()){
+    if(!m_casSupp.empty() && controleSequence){
         int i=0; // dans la boucle, i ne sera que sur les entiers, ce qui explique son incrémentation par deux
         while(i<m_casSupp.size() && controleSequence == true){ // tant qu'il y a des cas et que la séquence d'un cas n'a pas déjà été réalisée
         // m_casSupp.at(i)   = entier
@@ -337,7 +337,7 @@ void NoeudInstEcrire::traduitEnCPP(ostream & cout,unsigned int indentation) cons
     cout <<setw(4*indentation)<<"" <<"cout << " ;
     m_noeud->traduitEnCPP(cout, 0);
     
-    while(i<m_noeudsSupp.size()){
+    while(i<m_noeudsSupp.size()){ // tant qu'il y a des choses à écrire
         cout <<" << ";
         m_noeudsSupp.at(i)->traduitEnCPP(cout, 0);
         i++;

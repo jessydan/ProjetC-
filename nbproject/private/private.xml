@@ -7,12 +7,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fabien/NetBeansProjects/ProjetC-/tests/NoeudTest.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/ArbreAbstrait.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progLire.txt</file>
             <file>file:/home/fabien/NetBeansProjects/ProjetC-/Interpreteur.h</file>
-            <file>file:/home/fabien/NetBeansProjects/ProjetC-/tests/NoeudTest.h</file>
-            <file>file:/home/fabien/NetBeansProjects/ProjetC-/tests/NoeudTestRunner.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/ArbreAbstrait.h</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progTantQue.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progSi.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progSelon.txt</file>
             <file>file:/home/fabien/NetBeansProjects/ProjetC-/Exceptions.h</file>
             <file>file:/home/fabien/NetBeansProjects/ProjetC-/Interpreteur.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/main.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progSelon.cpp</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progEcrire.txt</file>
+            <file>file:/home/fabien/NetBeansProjects/ProjetC-/progSi.txt</file>
         </group>
     </open-files>
 </project-private>

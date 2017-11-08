@@ -5,7 +5,9 @@ procedure principale()
 
 i=0;
 si(i==3)
-ecrire("i=3");
+tantque(i<5)
+ecrire("test de double indentation");
+fintantque
 sinonsi(i==4)
 ecrire("i=4");
 sinon

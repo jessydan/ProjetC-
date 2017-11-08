@@ -105,8 +105,8 @@ class NoeudInstRepeter : public Noeud {
 ///////////////////////////////////////////////////////////////////////////////
 class NoeudInstSiRiche : public Noeud {
 // Classe pour représenter un noeud "instruction Si riche"
-//  et ses multiples fils : au min une conditionSi , une instructionSi et un instructionSinon
-//                          ou alors on rajoute des conditionSinonSi et des instructionSinonSi
+//  et ses 2 fils : un vecteur de noeuds qui est composé de condition / séquence ...
+//                  un vecteur de noeuds représentant le sinon, ( on a utiliser un noeud vide car c'est plus simple de les manipuler)
   public:
     NoeudInstSiRiche(std::vector<Noeud*> vectNoeuds, std::vector<Noeud*> noeudSinon);
      // Construit une instruction SiRiche avec le vector de noeud mis en paramètre.
@@ -164,7 +164,7 @@ class NoeudInstEcrire : public Noeud {
     NoeudInstEcrire(Noeud* noeudPremierElement, vector<Noeud*> noeudsSupp);
      // Construit une instruction ecrire avec les vector de noeuds mis en paramètre.
    ~NoeudInstEcrire() {}; // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction ecrire : ecris ( <expression> | <chaine> puis potentiellement d'autres)
+    int executer();  // Exécute l'instruction ecrire : ecrire ( <expression> | <chaine> puis potentiellement d'autres)
     void traduitEnCPP(ostream & cout,unsigned int indentation) const;
     
 
@@ -181,7 +181,7 @@ class NoeudInstLire : public Noeud {
     NoeudInstLire(Noeud* noeud, std::vector<Noeud*> noeuds);
      // Construit une instruction lire avec le noeud mis en paramètre.
    ~NoeudInstLire() {}; // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction lire : lis les variabels inscirs en paramètres
+    int executer();  // Exécute l'instruction lire : lis les variables inscrits en paramètres
     void traduitEnCPP(ostream & cout,unsigned int indentation) const;
     
 

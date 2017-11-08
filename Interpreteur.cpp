@@ -41,7 +41,7 @@ void Interpreteur::erreur(const string & message) const throw (SyntaxeException)
 
 void Interpreteur::traduitEnCPP(ostream & cout,unsigned int indentation)const{
     cout << "\n\n// ===================TRADUCTION EN C++================\n"<<endl;
-    cout << setw(4*indentation)<<""<<"#include <iostream>"<<endl;
+    cout << setw(4*indentation)<<""<<"#include <iostream>"<<endl; // affiche tout le nécessaire pour que le code généré puisse compiler
     cout << setw(4*indentation)<<""<<"using namespace std;"<<endl;
     cout << setw(4*indentation)<<""<<"\nint main() {"<< endl;
   

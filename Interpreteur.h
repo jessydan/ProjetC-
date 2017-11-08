@@ -42,7 +42,7 @@ private:
     Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
     Noeud*  instEcrire();  // <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
     Noeud*  instLire();    // <instLire>    ::= lire ( <variable> {, <variable> })
-    Noeud*  instSiRiche(); // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
+    Noeud*  instSiRiche(); // <instSiriche> ::= si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi (remplace le Si)
     Noeud*  instPour();    // <instPour>    ::= pour( [ <affectation> ] ; <expression> [ <affectation> ]) <seqInst> finpour
     Noeud * instSelon();   // <instSelon>   ::= selon( <variable>) cas <entier> : <seqInst>  {cas <entier>: <seqInst> } [defaut : <seqInst>] finselon
  
